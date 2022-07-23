@@ -1,8 +1,8 @@
 {
   "name": "ecommerce-website",
   "version": "1.0.0",
-  "description": "shopping cart website can be use for any industry",
-  "main": "server/server.js",
+  "description": "ecomm shopping cart",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/server.js",
@@ -14,14 +14,13 @@
     "type": "git",
     "url": "git+https://github.com/kartavya99/ecommerce-website.git"
   },
-  "author": "Kartavya",
+  "author": "Kartavya Saini",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/kartavya99/ecommerce-website/issues"
   },
   "homepage": "https://github.com/kartavya99/ecommerce-website#readme",
   "devDependencies": {
-    "concurrently": "^5.3.0",
-    "nodemon": "^2.0.4"
+    "concurrently": "^5.1.0"
   }
 }
