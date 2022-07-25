@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const { Schema } = mongoose;
+const Order = require("./Order");
 
 const userSchema = new Schema(
   {
@@ -35,6 +36,13 @@ const userSchema = new Schema(
       required: true,
       default: false,
     },
+    orders: [
+      {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "Order",
+      },
+    ],
   },
   {
     timestamps: true,
