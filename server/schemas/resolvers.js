@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Product, Order } = require("../schemas");
+const { User, Product, Order } = require("../models");
 const { signToken } = require("../utils/auth");
 const colors = require("colors");
 
@@ -8,22 +8,27 @@ const resolvers = {
     user: async (parent, args, context) => {
       if (context.user) {
         console.log(context.user);
-        return await User.findById(context.user.id).populate("Order");
+        return await User.findById(context.user._id);
       }
+
       throw new AuthenticationError();
     },
 
     users: async (parent, args, context) => {
       if (context.user) {
-        console.log(context.user.red.bold);
-        return await User.find({});
+        const user = await User.findById(context.user._id);
+
+        if (user.isAdmin) {
+          return await User.find({});
+        }
+
+        throw new AuthenticationError("You need to be logged in");
+        // return [];
       }
     },
 
-    product: async (parent, { _id }, context) => {
-      if (context.user) {
-        return await Product.findById(_id);
-      }
+    product: async (parent, { _id }) => {
+      return await Product.findById(_id);
     },
 
     order: async (parent, { id }, context) => {
@@ -77,19 +82,26 @@ const resolvers = {
 
     createProduct: async (
       parent,
-      { user, productName, image, brand, description, price, countInStock }
+      { productName, image, brand, description, price, countInStock },
+      context
     ) => {
-      return await Product.create({
-        user,
-        productName,
-        image,
-        brand,
-        description,
-        price,
-        countInStock,
-      });
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+        if (user.isAdmin) {
+          console.log(user);
+          return await Product.create({
+            user,
+            productName,
+            image,
+            brand,
+            description,
+            price,
+            countInStock,
+          });
+        }
+      }
 
-      return product;
+      throw new AuthenticationError("You need to be logged in");
     },
 
     createOrder: async (parent, { products }, context) => {

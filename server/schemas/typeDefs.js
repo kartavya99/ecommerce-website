@@ -40,7 +40,7 @@ const typeDefs = gql`
     user: User
     product(_id: ID!): Product
     order(_id: ID!): Order
-    users(isAdmin: Boolean): User
+    users: [User]
   }
 
   type Mutation {
@@ -48,8 +48,8 @@ const typeDefs = gql`
       firstName: String!
       lastName: String!
       email: String!
-      isAdmin: Boolean!
       password: String!
+      isAdmin: Boolean!
     ): Auth
     login(email: String!, password: String!): Auth
     createProduct(
