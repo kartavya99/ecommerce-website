@@ -61,7 +61,7 @@ const typeDefs = gql`
       price: Int!
       countInStock: Int!
     ): Product
-    createOrder(product: [ID]!): Order
+    createOrder(products: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String): User
     updateProduct(
       _id: ID!
