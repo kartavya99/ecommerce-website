@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGODB_RUI || "mongodb://localhost/e-comm-shop", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/ecomm-shop", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-module.export = mongoose.connection;
+module.exports = mongoose.connection;
