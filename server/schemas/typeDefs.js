@@ -37,10 +37,12 @@ const typeDefs = gql`
   }
 
   type Query {
-    user: User
+    me: User
+    singleUser: User
     product(_id: ID!): Product
     order(_id: ID!): Order
     users: [User]
+    products: [Product]
   }
 
   type Mutation {
@@ -62,7 +64,7 @@ const typeDefs = gql`
       countInStock: Int!
     ): Product
     createOrder(products: [ID]!): Order
-    updateUser(firstName: String, lastName: String, email: String): User
+    updateUserProfile(firstName: String, lastName: String, email: String): User
     updateProduct(
       _id: ID!
       productName: String
@@ -72,6 +74,19 @@ const typeDefs = gql`
       price: Int
       countInStock: Int
     ): Product
+    updateUser(
+      _id:ID
+      firstName: String
+      lastName: String
+      email: String
+      isAdmin: Boolean
+    )
+    deleteUser(
+      _id:ID!
+    )
+    deleteProduct(
+      _id: ID
+    )
   }
 `;
 

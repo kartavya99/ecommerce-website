@@ -5,7 +5,7 @@ const colors = require("colors");
 
 const resolvers = {
   Query: {
-    user: async (parent, args, context) => {
+    me: async (parent, args, context) => {
       if (context.user) {
         console.log(context.user);
         return await User.findById(context.user._id);
@@ -27,8 +27,22 @@ const resolvers = {
       }
     },
 
+    singleUser: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+
+        if (user.isAdmin) {
+          return await User.findById(_id);
+        }
+      }
+    },
+
     product: async (parent, { _id }) => {
       return await Product.findById(_id);
+    },
+
+    products: async (parent, args) => {
+      return await Product.find({});
     },
 
     order: async (parent, { id }, context) => {
@@ -80,6 +94,43 @@ const resolvers = {
       return { token, user };
     },
 
+    updateUserProfile: async (parent, args, context) => {
+      if (context.user) {
+        return User.findByIdAndUpdate(context.user.id, args, {
+          new: true,
+        });
+      }
+      throw new AuthenticationError("You need to be logged in");
+    },
+
+    deleteUser: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+        if (user.isAdmin) {
+          return await User.findByIdAndDelete(_id);
+        }
+      }
+    },
+
+    updateUser: async (
+      parent,
+      { _id, firstName, lastName, email, isAdmin },
+      context
+    ) => {
+      if (context.user) {
+        const user = await user.findById(context.user._id);
+        if (user.isAdmin) {
+          return await User.findByIdAndUpdate({
+            _id,
+            firstName,
+            lastName,
+            email,
+            isAdmin,
+          });
+        }
+      }
+    },
+
     createProduct: async (
       parent,
       { productName, image, brand, description, price, countInStock },
@@ -104,6 +155,40 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in");
     },
 
+    updateProduct: async (
+      parent,
+      { _id, productName, image, brand, description, price, countInStock },
+      context
+    ) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+
+        if (user.isAdmin) {
+          return await Product.findByIdAndUpdate({
+            _id,
+            productName,
+            image,
+            brand,
+            description,
+            price,
+            countInStock,
+          });
+        }
+      }
+    },
+
+    deleteProduct: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+
+        if (user.isAdmin) {
+          return await Product.findOneAndDelete({
+            _id,
+          });
+        }
+      }
+    },
+
     createOrder: async (parent, { products }, context) => {
       if (context.user) {
         const order = new Order({ products });
@@ -112,15 +197,6 @@ const resolvers = {
           $push: { orders: order },
         });
         return order;
-      }
-      throw new AuthenticationError("You need to be logged in");
-    },
-
-    updateUser: async (parent, args, context) => {
-      if (context.user) {
-        return User.findByIdAndUpdate(context.user.id, args, {
-          new: true,
-        });
       }
       throw new AuthenticationError("You need to be logged in");
     },
