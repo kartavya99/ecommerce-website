@@ -36,7 +36,7 @@ const resolvers = {
     },
   },
 
-  mutation: {
+  Mutation: {
     createUser: async (
       parent,
       { firstName, lastName, email, password, isAdmin }

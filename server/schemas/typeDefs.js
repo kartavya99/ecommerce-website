@@ -40,7 +40,7 @@ const typeDefs = gql`
     user: User
     product(_id: ID!): Product
     order(_id: ID!): Order
-    allUsers(isAdmin: Boolean): User
+    users(isAdmin: Boolean): User
   }
 
   type Mutation {
