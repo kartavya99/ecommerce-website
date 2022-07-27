@@ -22,7 +22,7 @@ const typeDefs = gql`
 
   type Order {
     orderItems: [OrderItem]
-    shippingAddress: [shippingAdd]
+    shippingAddress: [ShippingAdd]
     paymentMethod: String!
     paymentResult: [paymentRes]
     totalPrice: Int!
