@@ -18,7 +18,7 @@
 // Routes required for order
 // create new order - private done***
 // get order by ID - private done***
-// update order to paid - private
-// update order to delivered - private/admin
+// update order to paid - private - need assistance
+// update order to delivered - private/admin - need assistance
 // get logged in user orders - private
 // get all orders - private/admin - done ***

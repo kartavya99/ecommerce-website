@@ -237,6 +237,50 @@ const resolvers = {
       }
       throw new AuthenticationError("You need to be logged in");
     },
+
+    //require assistance to finish this route
+    UpdateOrderToPaid: async (
+      parent,
+      { isPaid, paidAt, paymentResult },
+      context
+    ) => {
+      if (context.user) {
+        const order = await Order.findById(_id);
+
+        if (order) {
+          (order.isPaid = true),
+            (order.paidAt = Date.now()),
+            (order.paymentResult = {});
+        }
+
+        const updatedOrder = await order.save();
+        return updatedOrder;
+      } else {
+        throw new Error("Order not found");
+      }
+    },
+
+    UpdateOrderToDelivered: async (
+      parent,
+      { isDelivered, deliveredAt },
+      context
+    ) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+
+        if (user.isAdmin) {
+          const order = await Order.findById(_id);
+
+          if (order) {
+            (order.isDelivered = true), (order.deliveredAt = Date.now());
+
+            const updatedOrder = await order.save();
+          } else {
+            throw new Error("Order not found");
+          }
+        }
+      }
+    },
   },
 };
 
