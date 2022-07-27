@@ -41,7 +41,7 @@ const resolvers = {
       return await Product.findById(_id);
     },
 
-    products: async (parent, args) => {
+    getAllProducts: async (parent, args) => {
       return await Product.find({});
     },
 
@@ -52,6 +52,20 @@ const resolvers = {
       }
 
       throw new AuthenticationError("You need to be logged in");
+    },
+
+    getOrder: async (parent, { _id }, context) => {
+      return await Order.findById(_id);
+    },
+
+    getAllOrder: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id);
+
+        if (user.isAdmin) {
+          return await Order.find({});
+        }
+      }
     },
   },
 
@@ -189,13 +203,36 @@ const resolvers = {
       }
     },
 
-    createOrder: async (parent, { products }, context) => {
+    createOrder: async (
+      parent,
+      {
+        orderItems,
+        shippingAddress,
+        paymentMethod,
+        totalPrice,
+        taxPrice,
+        shippingPrice,
+      },
+      context
+    ) => {
       if (context.user) {
-        const order = new Order({ products });
-
-        await User.findByIdAndUpdate(context.user.id, {
-          $push: { orders: order },
+        const order = new Order({
+          orderItems,
+          shippingAddress,
+          paymentMethod,
+          totalPrice,
+          taxPrice,
+          shippingPrice,
         });
+
+        if (!orderItems && orderItems.length !== 0) {
+          await User.findByIdAndUpdate(context.user._id, {
+            $push: { orders: order },
+          });
+        } else {
+          throw new Error("There is no order items");
+        }
+
         return order;
       }
       throw new AuthenticationError("You need to be logged in");

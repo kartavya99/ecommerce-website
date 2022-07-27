@@ -25,7 +25,7 @@ const orderSchema = new Schema(
     shippingAddress: {
       address: { type: String, required: true },
       city: { type: String, required: true },
-      postCode: { type: String, required: true },
+      postCode: { type: Number, required: true },
       country: { type: String, required: true },
     },
     paymentMethod: {
@@ -37,6 +37,11 @@ const orderSchema = new Schema(
       status: { type: String },
       update_time: { type: String },
       email_address: { type: String },
+    },
+    totalPrice: {
+      type: Number,
+      required: true,
+      default: 0.0,
     },
     taxPrice: {
       type: Number,

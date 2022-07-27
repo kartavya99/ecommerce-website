@@ -22,6 +22,15 @@ const typeDefs = gql`
 
   type Order {
     orderItems: [OrderItem]
+    shippingAddress: [shippingAdd]
+    paymentMethod: String!
+    paymentResult: [paymentRes]
+    totalPrice: Int!
+    taxPrice: Int!
+    shippingPrice: Int!
+    isPaid: Boolean!
+    paidAt: Date!
+    isDelivered: Boolean!
   }
 
   type OrderItem {
@@ -29,6 +38,20 @@ const typeDefs = gql`
     quantity: Int!
     image: String!
     price: Int!
+  }
+
+  type ShippingAdd {
+    address: String!
+    city: String!
+    postCode: Int!
+    country: String!
+  }
+
+  type paymentRes {
+    _id: ID
+    status: String!
+    update_time: String!
+    email_address: String!
   }
 
   type Auth {
@@ -40,9 +63,11 @@ const typeDefs = gql`
     me: User
     singleUser: User
     product(_id: ID!): Product
+    getAllProducts: [Product]
     order(_id: ID!): Order
     users: [User]
-    products: [Product]
+    getOrder(_id: ID!): Order
+    getAllOrder: [Order]
   }
 
   type Mutation {
@@ -63,7 +88,6 @@ const typeDefs = gql`
       price: Int!
       countInStock: Int!
     ): Product
-    createOrder(products: [ID]!): Order
     updateUserProfile(firstName: String, lastName: String, email: String): User
     updateProduct(
       _id: ID!
@@ -75,18 +99,28 @@ const typeDefs = gql`
       countInStock: Int
     ): Product
     updateUser(
-      _id:ID
+      _id: ID
       firstName: String
       lastName: String
       email: String
       isAdmin: Boolean
-    )
-    deleteUser(
-      _id:ID!
-    )
-    deleteProduct(
-      _id: ID
-    )
+    ): User
+    deleteUser(_id: ID!): User
+    deleteProduct(_id: ID): Product
+    createOrder(
+      orderItems: [orderItem]!
+      shippingAddress: [shippingAdd]!
+      paymentMethod: String!
+      totalPrice: Int!
+      taxPrice: Int!
+      shippingPrice: Int!
+    ): Order
+    UpdateOrderToPaid(
+      isPaid: Boolean!
+      paidAt: Date!
+      paymentResult: [paymentRes]!
+    ): Order
+    UpdateOrderToDelivered(isDelivered: Boolean!, deliveredAt: Date!): Order
   }
 `;
 
