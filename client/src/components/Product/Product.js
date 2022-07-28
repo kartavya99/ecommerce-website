@@ -10,15 +10,17 @@ const Products = (props) => {
       <h4 className={classes["product-heading"]}>LATEST PRODUCTS</h4>
       <div className={classes["container-fluid"]}>
         {dummy_project.map((project) => (
-          <Card className={classes.card}>
+          <Card key={project._id} className={classes.card}>
             <Card.Img
               variant="top"
               src={project.image}
               className={classes.img}
             />
             <Card.Body>
-              <Card.Title>{project.productName}</Card.Title>
-              <Card.Text>Price: {project.price}</Card.Text>
+              <Card.Title>
+                <h4>{project.productName}</h4>
+              </Card.Title>
+              <Card.Text as="h4">${project.price}</Card.Text>
             </Card.Body>
           </Card>
         ))}
