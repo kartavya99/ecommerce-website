@@ -120,8 +120,11 @@ const resolvers = {
     deleteUser: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await User.findById(context.user._id);
+        console.log(user);
         if (user.isAdmin) {
           return await User.findByIdAndDelete(_id);
+        } else {
+          throw new AuthenticationError("Only Admin can delete user");
         }
       }
     },
@@ -203,18 +206,16 @@ const resolvers = {
       }
     },
 
-    createOrder: async (
-      parent,
-      {
+    createOrder: async (parent, args, context) => {
+      console.log(JSON.stringify(args));
+      const {
         orderItems,
         shippingAddress,
         paymentMethod,
         totalPrice,
         taxPrice,
         shippingPrice,
-      },
-      context
-    ) => {
+      } = args;
       if (context.user) {
         const order = new Order({
           orderItems,
@@ -225,15 +226,20 @@ const resolvers = {
           shippingPrice,
         });
 
-        if (!orderItems && orderItems.length !== 0) {
-          await User.findByIdAndUpdate(context.user._id, {
-            $push: { orders: order },
-          });
-        } else {
-          throw new Error("There is no order items");
-        }
+        await Order.create({
+          orderItems,
+          shippingAddress,
+          paymentMethod,
+          totalPrice,
+          taxPrice,
+          shippingPrice,
+        });
 
-        return order;
+        await User.findByIdAndUpdate(context.user._id, {
+          $push: { orders: order },
+        });
+
+        return { order };
       }
       throw new AuthenticationError("You need to be logged in");
     },
@@ -273,8 +279,9 @@ const resolvers = {
 
           if (order) {
             (order.isDelivered = true), (order.deliveredAt = Date.now());
+            // how to update on mongodb
 
-            const updatedOrder = await order.save();
+            const updatedOrder = await order.update();
           } else {
             throw new Error("Order not found");
           }

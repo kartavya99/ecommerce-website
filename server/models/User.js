@@ -30,6 +30,9 @@ const userSchema = new Schema(
       required: true,
       default: false,
     },
+    isCreatedAt: {
+      type: Date,
+    },
 
     isAdmin: {
       type: Boolean,

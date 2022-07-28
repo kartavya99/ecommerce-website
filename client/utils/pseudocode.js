@@ -4,11 +4,11 @@
 // -------------components----------------
 // Header
 // Product
-//
+// Footer
 
 // -------- pages -------
 // HomePage
 // ProductPage
 // Cart
 // loginPage
-// RegisterPare
+// RegisterPage

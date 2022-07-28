@@ -14,6 +14,7 @@ const typeDefs = gql`
     email: String!
     isAdmin: Boolean!
     orders: [Order]
+    isCreatedAt: Date
   }
 
   type Product {
@@ -27,8 +28,9 @@ const typeDefs = gql`
   }
 
   type Order {
-    orderItems: [OrderItem]
-    shippingAddress: [ShippingAdd]
+    _id: ID!
+    orderItems: [OrderItem]!
+    shippingAddress: ShippingAdd!
     paymentMethod: String!
     paymentResult: [PaymentRes]
     totalPrice: Int!
@@ -104,6 +106,7 @@ const typeDefs = gql`
       email: String!
       password: String!
       isAdmin: Boolean!
+      isCreatedAt: Date
     ): Auth
     login(email: String!, password: String!): Auth
     createProduct(
@@ -135,8 +138,8 @@ const typeDefs = gql`
     deleteUser(_id: ID!): User
     deleteProduct(_id: ID): Product
     createOrder(
-      OrderItems: OrderItemInput!
-      ShippingAddress: ShippingInput!
+      orderItems: [OrderItemInput]!
+      shippingAddress: ShippingInput!
       paymentMethod: String!
       totalPrice: Int!
       taxPrice: Int!
@@ -145,7 +148,7 @@ const typeDefs = gql`
     UpdateOrderToPaid(
       isPaid: Boolean!
       paidAt: Date!
-      paymentResult: PaymentResInput!
+      paymentResult: [PaymentResInput]!
     ): Order
     UpdateOrderToDelivered(isDelivered: Boolean!, deliveredAt: Date!): Order
   }
