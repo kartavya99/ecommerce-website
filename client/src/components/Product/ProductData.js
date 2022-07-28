@@ -1,4 +1,3 @@
-import img from "../../images/new.png";
 import house from "../../images/house.jpg";
 import shoes from "../../images/shoes.jpg";
 
