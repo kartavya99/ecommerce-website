@@ -1,6 +1,12 @@
 const { gql } = require("apollo-server-express");
+const {
+  ApolloServerPluginLandingPageLocalDefault,
+} = require("apollo-server-core");
+const { GraphQLScalarType, Kind } = require("graphql");
 
 const typeDefs = gql`
+  scalar Date
+
   type User {
     _id: ID!
     firstName: String!
@@ -70,6 +76,27 @@ const typeDefs = gql`
     getAllOrder: [Order]
   }
 
+  input OrderItemInput {
+    productName: String!
+    quantity: Int!
+    image: String!
+    price: Int!
+  }
+
+  input ShippingInput {
+    address: String!
+    city: String!
+    postCode: Int!
+    country: String!
+  }
+
+  input PaymentResInput {
+    _id: ID
+    status: String!
+    update_time: String!
+    email_address: String!
+  }
+
   type Mutation {
     createUser(
       firstName: String!
@@ -108,8 +135,8 @@ const typeDefs = gql`
     deleteUser(_id: ID!): User
     deleteProduct(_id: ID): Product
     createOrder(
-      orderItems: [OrderItem]!
-      shippingAddress: [ShippingAdd]!
+      OrderItems: OrderItemInput!
+      ShippingAddress: ShippingInput!
       paymentMethod: String!
       totalPrice: Int!
       taxPrice: Int!
@@ -118,7 +145,7 @@ const typeDefs = gql`
     UpdateOrderToPaid(
       isPaid: Boolean!
       paidAt: Date!
-      paymentResult: [paymentRes]!
+      paymentResult: PaymentResInput!
     ): Order
     UpdateOrderToDelivered(isDelivered: Boolean!, deliveredAt: Date!): Order
   }
