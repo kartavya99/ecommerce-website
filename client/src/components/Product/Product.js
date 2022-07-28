@@ -1,26 +1,28 @@
 import React from "react";
 import dummy_project from "./ProductData";
+import Card from "react-bootstrap/Card";
+import classes from "./product.module.css";
 
 const Products = (props) => {
   //   console.log(dummy_project);
   return (
     <div>
-      <h1>Products</h1>
-      <section className="container-fluid">
+      <h4 className={classes["product-heading"]}>LATEST PRODUCTS</h4>
+      <div className={classes["container-fluid"]}>
         {dummy_project.map((project) => (
-          <div key={project._id}>
-            <h1>Product: {project.productName}</h1>
-            <img
+          <Card className={classes.card}>
+            <Card.Img
+              variant="top"
               src={project.image}
-              alt={`product`}
-              className="card-body "
-            ></img>
-            <h4>Product detail : {project.description}</h4>
-            <h3>$: {project.price}</h3>
-            <h3>Stock : {project.countInStock}</h3>
-          </div>
+              className={classes.img}
+            />
+            <Card.Body>
+              <Card.Title>{project.productName}</Card.Title>
+              <Card.Text>Price: {project.price}</Card.Text>
+            </Card.Body>
+          </Card>
         ))}
-      </section>
+      </div>
     </div>
   );
 };

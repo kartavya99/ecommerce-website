@@ -1,0 +1,25 @@
+.container-fluid {
+  display: flex;
+  /* align-items: flex-start; */
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  padding: 0;
+  margin-top: 30px;
+}
+
+.product-heading {
+  margin: 20px 30px;
+}
+
+.card {
+  width: 18rem;
+  margin: 15px;
+  box-shadow: 0px 5px 10px 0px #888888;
+}
+
+.img {
+  size: 15rem;
+  padding: 20px;
+  border-radius: 10px;
+}
