@@ -24,7 +24,7 @@ const typeDefs = gql`
     orderItems: [OrderItem]
     shippingAddress: [ShippingAdd]
     paymentMethod: String!
-    paymentResult: [paymentRes]
+    paymentResult: [PaymentRes]
     totalPrice: Int!
     taxPrice: Int!
     shippingPrice: Int!
@@ -47,7 +47,7 @@ const typeDefs = gql`
     country: String!
   }
 
-  type paymentRes {
+  type PaymentRes {
     _id: ID
     status: String!
     update_time: String!
@@ -108,8 +108,8 @@ const typeDefs = gql`
     deleteUser(_id: ID!): User
     deleteProduct(_id: ID): Product
     createOrder(
-      orderItems: [orderItem]!
-      shippingAddress: [shippingAdd]!
+      orderItems: [OrderItem]!
+      shippingAddress: [ShippingAdd]!
       paymentMethod: String!
       totalPrice: Int!
       taxPrice: Int!
