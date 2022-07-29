@@ -10,21 +10,15 @@ const resolvers = {
         console.log(context.user);
         return await User.findById(context.user._id);
       }
-
       throw new AuthenticationError();
     },
 
     users: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id);
-
-        if (user.isAdmin) {
-          return await User.find({});
-        }
-
-        throw new AuthenticationError("You need to be logged in");
-        // return [];
+      if (context.user.isAdmin) {
+        return await User.find({});
       }
+
+      throw new AuthenticationError("You need to be Admin");
     },
 
     singleUser: async (parent, { _id }, context) => {
@@ -208,6 +202,7 @@ const resolvers = {
 
     createOrder: async (parent, args, context) => {
       console.log(JSON.stringify(args));
+      console.log(context.user);
       const {
         orderItems,
         shippingAddress,
@@ -217,29 +212,31 @@ const resolvers = {
         shippingPrice,
       } = args;
       if (context.user) {
-        const order = new Order({
-          orderItems,
-          shippingAddress,
-          paymentMethod,
-          totalPrice,
-          taxPrice,
-          shippingPrice,
-        });
+        // const order = new Order({
+        //   orderItems,
+        //   shippingAddress,
+        //   paymentMethod,
+        //   totalPrice,
+        //   taxPrice,
+        //   shippingPrice,
+        // });
 
-        await Order.create({
+        const order = await Order.create({
           orderItems,
           shippingAddress,
           paymentMethod,
           totalPrice,
           taxPrice,
           shippingPrice,
+          user: context.user._id,
         });
+        console.log(order);
 
         await User.findByIdAndUpdate(context.user._id, {
-          $push: { orders: order },
+          $push: { orders: order._id },
         });
 
-        return { order };
+        return order;
       }
       throw new AuthenticationError("You need to be logged in");
     },

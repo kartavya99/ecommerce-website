@@ -83,6 +83,7 @@ const typeDefs = gql`
     quantity: Int!
     image: String!
     price: Int!
+    product: ID!
   }
 
   input ShippingInput {
