@@ -18,17 +18,18 @@ const resolvers = {
         return await User.find({});
       }
 
-      throw new AuthenticationError("You need to be Admin");
+      throw new AuthenticationError(
+        "You need to be Admin to see users details"
+      );
     },
 
     singleUser: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id);
-
-        if (user.isAdmin) {
-          return await User.findById(_id);
-        }
+      if (context.user.isAdmin) {
+        return await User.findById(_id);
       }
+      throw new AuthenticationError(
+        "You need to be Admin to see the details of user"
+      );
     },
 
     product: async (parent, { _id }) => {
@@ -53,13 +54,10 @@ const resolvers = {
     },
 
     getAllOrder: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id);
-
-        if (user.isAdmin) {
-          return await Order.find({});
-        }
+      if (context.user.isAdmin) {
+        return await Order.find({});
       }
+      throw new AuthenticationError("You need to be Admin to get all orders");
     },
   },
 
@@ -112,14 +110,10 @@ const resolvers = {
     },
 
     deleteUser: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id);
-        console.log(user);
-        if (user.isAdmin) {
-          return await User.findByIdAndDelete(_id);
-        } else {
-          throw new AuthenticationError("Only Admin can delete user");
-        }
+      if (context.user.isAdmin) {
+        await User.findByIdAndDelete(_id);
+      }
+        throw new AuthenticationError("Only Admin can delete user");
       }
     },
 
