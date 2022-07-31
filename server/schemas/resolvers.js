@@ -62,10 +62,8 @@ const resolvers = {
   },
 
   Mutation: {
-    createUser: async (
-      parent,
-      { firstName, lastName, email, password, isAdmin }
-    ) => {
+    createUser: async (parent, args) => {
+      const { firstName, lastName, email, password, isAdmin } = args;
       const user = await User.create({
         firstName,
         lastName,
@@ -113,90 +111,77 @@ const resolvers = {
       if (context.user.isAdmin) {
         await User.findByIdAndDelete(_id);
       }
-        throw new AuthenticationError("Only Admin can delete user");
-      }
+      throw new AuthenticationError("Only Admin can delete user");
     },
 
-    updateUser: async (
-      parent,
-      { _id, firstName, lastName, email, isAdmin },
-      context
-    ) => {
-      if (context.user) {
-        const user = await user.findById(context.user._id);
-        if (user.isAdmin) {
-          return await User.findByIdAndUpdate({
-            _id,
-            firstName,
-            lastName,
-            email,
-            isAdmin,
-          });
-        }
+    updateUser: async (parent, args, context) => {
+      const { _ud, firstName, lastName, email, isAdmin } = args;
+      if (context.user.isAdmin) {
+        return await User.findByIdAndUpdate({
+          _ud,
+          firstName,
+          lastName,
+          email,
+          isAdmin,
+        });
       }
+      throw new AuthenticationError("Only Admin can update User details");
     },
 
-    createProduct: async (
-      parent,
-      { productName, image, brand, description, price, countInStock },
-      context
-    ) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id);
-        if (user.isAdmin) {
-          console.log(user);
-          return await Product.create({
-            user,
-            productName,
-            image,
-            brand,
-            description,
-            price,
-            countInStock,
-          });
-        }
+    createProduct: async (parent, args, context) => {
+      const { productName, image, brand, description, price, countInStock } =
+        args;
+      if (context.user.isAdmin) {
+        console.log(user);
+        return await Product.create({
+          user,
+          productName,
+          image,
+          brand,
+          description,
+          price,
+          countInStock,
+        });
       }
-
-      throw new AuthenticationError("You need to be logged in");
+      throw new AuthenticationError("Only admin can create a product");
     },
 
-    updateProduct: async (
-      parent,
-      { _id, productName, image, brand, description, price, countInStock },
-      context
-    ) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id);
-
-        if (user.isAdmin) {
-          return await Product.findByIdAndUpdate({
-            _id,
-            productName,
-            image,
-            brand,
-            description,
-            price,
-            countInStock,
-          });
-        }
+    updateProduct: async (parent, args, context) => {
+      const {
+        _id,
+        productName,
+        image,
+        brand,
+        description,
+        price,
+        countInStock,
+      } = args;
+      if (context.user.isAdmin) {
+        return await Product.findByIdAndUpdate({
+          _id,
+          productName,
+          image,
+          brand,
+          description,
+          price,
+          countInStock,
+        });
       }
+      throw new AuthenticationError("Only admin can update a product");
     },
 
     deleteProduct: async (parent, { _id }, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id);
-
-        if (user.isAdmin) {
-          return await Product.findOneAndDelete({
-            _id,
-          });
-        }
+      if (context.user.isAdmin) {
+        return await Product.findOneAndDelete({
+          _id,
+        });
       }
+      throw new AuthenticationError("Only admin can delete a product");
     },
 
     createOrder: async (parent, args, context) => {
-      console.log(JSON.stringify(args));
-      console.log(context.user);
+      // console.log(JSON.stringify(args));
+      // console.log(context.user);
       const {
         orderItems,
         shippingAddress,
@@ -206,15 +191,6 @@ const resolvers = {
         shippingPrice,
       } = args;
       if (context.user) {
-        // const order = new Order({
-        //   orderItems,
-        //   shippingAddress,
-        //   paymentMethod,
-        //   totalPrice,
-        //   taxPrice,
-        //   shippingPrice,
-        // });
-
         const order = await Order.create({
           orderItems,
           shippingAddress,
@@ -236,11 +212,8 @@ const resolvers = {
     },
 
     //require assistance to finish this route
-    UpdateOrderToPaid: async (
-      parent,
-      { isPaid, paidAt, paymentResult },
-      context
-    ) => {
+    UpdateOrderToPaid: async (parent, args, context) => {
+      const { isPaid, paidAt, paymentResult } = args;
       if (context.user) {
         const order = await Order.findById(_id);
 
