@@ -1,26 +1,25 @@
 import React from "react";
 import dummy_products from "./ProductData";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 import classes from "./product.module.css";
 
-const Products = ({ Product }) => {
+const Products = ({}) => {
   //   console.log(dummy_project);
   return (
     <div>
       <h4 className={classes["product-heading"]}>LATEST PRODUCTS</h4>
       <div className={classes["container-fluid"]}>
         {dummy_products.map((product) => (
-          <Card key={product._id} className={classes.card}>
-            <Card.Img
-              variant="top"
-              src={product.image}
-              className={classes.img}
-            />
+          <Card className="my-3 p-3 rounded" key={product._id}>
+            <Card.Img src={product.image} variant="top" />
+
             <Card.Body>
               <Card.Title>
-                <h4>{product.productName}</h4>
+                <strong>{product.productName}</strong>
               </Card.Title>
-              <Card.Text as="h4">${product.price}</Card.Text>
+
+              <Card.Text>${product.price}</Card.Text>
             </Card.Body>
           </Card>
         ))}
