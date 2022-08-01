@@ -1,0 +1,42 @@
+[
+  {
+    "productName": "iPhone 13 Pro 256GB Memory",
+    "image": "/images/phone.jpg",
+    "brand": "Apple",
+    "description": "The iPhone 13 Pro is a great value iPhone with a heap of big features. The iPhone 13 Pro has a stunning design, comes in a range of new colours, including alpine green, and has a bigger battery!",
+    "price": "1899.99",
+    "countInStock": "10"
+  },
+  {
+    "productName": "AirPods (3rd generation)",
+    "image": "/images.aipods3.jpg",
+    "brand": "Apple",
+    "description": "AirPods are lightweight and offer a contoured design. They sit at just the right angle for comfort and to better direct audio to your ear. The stem is 33 per cent shorter than AirPods (2nd generation) and includes a force sensor to easily control music and calls.",
+    "price": "279.00",
+    "countInStock": "6"
+  },
+  {
+    "productName": "ASUS CX1 Chromebook CX1500CNA-BR0057",
+    "image": "/images.laptop.jpg",
+    "brand": "ASUS",
+    "description": "This ASUS Chromebook powers your day with productivity boosting features like powerful, dual-core Intel processors. You can take it on the go with ease, thanks to its lightweight, slim design. Plus, with up to 11 hours of battery life, you can work and play for longer.",
+    "price": "447.00",
+    "countInStock": "3"
+  },
+  {
+    "productName": "Kindle Paperwhite 8GB 11th Generation 2021",
+    "image": "/images/kindle.jpg",
+    "brand": "Kindle",
+    "description": "This Kindle Paperwhite is designed for those who are looking to replicate the printed-page feeling without the bulk of carrying around a novel, offering 8 GB of space for your favourite reads.",
+    "price": "239",
+    "countInStock": "7"
+  },
+  {
+    "productName": "Belkin BoostCharge 10K Powerbank White",
+    "image": "images/powerBank.jpg",
+    "brand": "Belkin",
+    "description": "The Belkin BoostCharge Powerbank is a great way to keep your devices charged on the go. It has a 10000 mAh battery and 2 USB-A ports and 1 USB-C port for charging up a variety of different devices.",
+    "price": "48",
+    "countInStock": "14"
+  }
+]
