@@ -7,7 +7,7 @@ import classes from "./product.module.css";
 const Products = ({}) => {
   //   console.log(dummy_project);
   return (
-    <div>
+    <div className={classes["main-container"]}>
       <h4 className={classes["product-heading"]}>LATEST PRODUCTS</h4>
       <div className={classes["container-fluid"]}>
         {dummy_products.map((product) => (

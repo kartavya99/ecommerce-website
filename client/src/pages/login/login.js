@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
-import FormContainer from "../components/Form/FormContainer";
+import FormContainer from "../../components/Form/FormContainer";
+import classes from "./login.module.css";
 
 const Login = () => {
   return (

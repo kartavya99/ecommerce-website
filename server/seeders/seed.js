@@ -10,17 +10,7 @@ db.once("open", async () => {
 
     await User.create(userSeeds);
 
-    for (let i = 0; i < productSeeds.length; i++) {
-      const { _id } = await Product.create(productSeeds[i]);
-      const user = await User.findOneAndUpdate(
-        { fistName: fistName, lastName: lastName },
-        {
-          $addToSet: {
-            product: _id,
-          },
-        }
-      );
-    }
+    await Product.create(productSeeds);
   } catch (err) {
     console.error(err);
     process.exit(1);

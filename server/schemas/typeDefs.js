@@ -69,7 +69,7 @@ const typeDefs = gql`
 
   type Query {
     me: User
-    singleUser: User
+    singleUser(_id: ID!): User
     product(_id: ID!): Product
     getAllProducts: [Product]
     order(_id: ID!): Order

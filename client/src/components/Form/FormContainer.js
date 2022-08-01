@@ -2,9 +2,15 @@ import React from "react";
 
 import { Container, Row, Col } from "react-bootstrap";
 
+const styles = {
+  container: {
+    minHeight: "100vh",
+  },
+};
+
 const FormContainer = ({ children }) => {
   return (
-    <Container>
+    <Container style={styles.container}>
       <Row className="justify-content-md-center">
         <Col xs={12} md={6}>
           {children}

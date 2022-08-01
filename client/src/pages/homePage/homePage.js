@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import Products from "../components/Product/Product";
-import Loader from "../components/Loader/Loader";
+import Products from "../../components/Product/Product";
+import Loader from "../../components/Loader/Loader";
 
 const HomePage = (props) => {
   console.log();

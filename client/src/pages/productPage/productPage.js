@@ -10,7 +10,7 @@ import {
   Form,
 } from "react-bootstrap";
 
-import house from "../images/house.jpg";
+import house from "../../images/house.jpg";
 
 const product = [
   {
@@ -26,12 +26,18 @@ const product = [
   },
 ];
 
+const styles = {
+  container: {
+    minHeight: "100vh",
+  },
+};
+
 const ProductPage = () => {
   console.log(product);
   console.log(product[0].user);
 
   return (
-    <>
+    <div style={styles.container}>
       <Link className="btn btn-dark m-4" to="/">
         Go BACK
       </Link>
@@ -93,7 +99,7 @@ const ProductPage = () => {
           </Card>
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 

@@ -15,6 +15,7 @@ const resolvers = {
 
     users: async (parent, args, context) => {
       if (context.user.isAdmin) {
+        // console.log(context.user.isAdmin);
         return await User.find({});
       }
 
