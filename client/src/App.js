@@ -12,6 +12,7 @@ import Header from "./components/Header/Header";
 import Products from "./components/Product/Product";
 import Footer from "./components/Footer/Footer";
 import Login from "./pages/login";
+import Register from "./pages/register";
 import HomePage from "./pages/homePage";
 import ProductPage from "./pages/productPage";
 
@@ -48,6 +49,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/register" element={<Register />}></Route>
             <Route path="/products" element={<Products />}></Route>
             <Route path="products/:productId" element={<ProductPage />}></Route>
           </Routes>

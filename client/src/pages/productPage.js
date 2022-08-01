@@ -32,10 +32,11 @@ const ProductPage = () => {
 
   return (
     <>
-      <h1>Product detail</h1>
-      {/* <Link>Go Back</Link> */}
+      <Link className="btn btn-dark m-4" to="/">
+        Go BACK
+      </Link>
 
-      <Row>
+      <Row className=" m-3 pr-5">
         <Col me={6}>
           <Image src={product[0].image} alt={product[0].productName} fluid />
         </Col>
@@ -84,7 +85,7 @@ const ProductPage = () => {
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <Button className="btn-block" type="button">
+                <Button className="btn btn-dark btn-sm" type="button">
                   Add To Cart
                 </Button>
               </ListGroup.Item>

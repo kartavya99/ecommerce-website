@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/Form/FormContainer";
 
@@ -26,7 +27,12 @@ const Login = () => {
       </Form>
 
       <Row className="py-3">
-        <Col>Resiter</Col>
+        <Col>
+          New Customer?
+          <Link className="btn btn-dark m-4" to="/register">
+            Register
+          </Link>
+        </Col>
       </Row>
     </FormContainer>
   );
