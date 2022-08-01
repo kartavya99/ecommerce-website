@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../components/Form/FormContainer";
 
 const Login = () => {
@@ -24,6 +24,10 @@ const Login = () => {
           Sign In
         </Button>
       </Form>
+
+      <Row className="py-3">
+        <Col>Resiter</Col>
+      </Row>
     </FormContainer>
   );
 };

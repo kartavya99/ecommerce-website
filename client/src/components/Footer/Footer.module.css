@@ -1,14 +1,16 @@
 .footer {
-  margin: 0;
+  /* margin: 0; */
   text-align: center;
   color: azure;
   background-color: rgb(33, 37, 41);
   height: 50px;
-  width: auto;
+  width: 100%;
   font-size: 25px;
 }
 
 .container {
-  margin: 0;
   width: 100%;
+  background-color: rgb(33, 37, 41);
+  margin: 0;
+  padding: 0;
 }
