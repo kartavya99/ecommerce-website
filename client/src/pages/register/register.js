@@ -8,6 +8,9 @@ const registerPage = () => {
   return (
     <FormContainer>
       <div className={classes["main-container"]}>
+        <div className={classes.heading}>
+          <h1>REGISTER</h1>
+        </div>
         <Form>
           <div className={classes.title}>
             <Form.Group controlId="name">

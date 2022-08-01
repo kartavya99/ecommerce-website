@@ -1,5 +1,5 @@
 .main-container {
-  padding-top: 100px;
+  padding-top: 50px;
 }
 
 .title {
@@ -18,4 +18,8 @@
 
 .holder {
   background-color: #f8f9fa;
+}
+
+.heading {
+  padding-bottom: 20px;
 }

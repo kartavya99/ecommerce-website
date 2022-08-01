@@ -9,13 +9,15 @@ const Login = () => {
     <FormContainer>
       <div className={classes["main-container"]}>
         <div className={classes.heading}>
-          <h1>Sign In</h1>
+          <h1>SIGN IN</h1>
         </div>
         <Form>
           <Form.Group className="mb-3" controlId="email">
-            <Form.Label>Email Address</Form.Label>
+            <Form.Label htmlFor="email">Email Address</Form.Label>
             <Form.Control
+              name="email"
               type="email"
+              id="email"
               placeholder="Enter email address"
               className={classes.holder}
             />
@@ -27,10 +29,12 @@ const Login = () => {
           </Form.Group>
 
           <Form.Group controlId="password">
-            <Form.Label>Password</Form.Label>
+            <Form.Label htmlFor="pwd">Password</Form.Label>
             <Form.Control
+              name="password"
               type="password"
               placeholder="Password"
+              id="pwd"
               className={classes.holder}
             />
           </Form.Group>
