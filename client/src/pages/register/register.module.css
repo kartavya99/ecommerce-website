@@ -1,8 +1,8 @@
 .main-container {
-  padding-top: 150px;
+  padding-top: 100px;
 }
 
-.heading {
+.title {
   padding-bottom: 20px;
 }
 
@@ -18,8 +18,4 @@
 
 .holder {
   background-color: #f8f9fa;
-}
-
-.text {
-  margin: 5px;
 }
