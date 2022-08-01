@@ -40,7 +40,7 @@ export const QUERY_ME = gql`
 `;
 
 export const QUERY_SINGLE_USER = gql`
-query single_user {
+  query singleUser {
     _id
     firstName
     lastName
@@ -75,7 +75,20 @@ query single_user {
       isDelivered
     }
   }
-}
+`;
+
+export const QUERY_ALL_PRODUCTS = gql`
+  query Query {
+    getAllProducts {
+      _id
+      productName
+      image
+      brand
+      description
+      price
+      countInStock
+    }
+  }
 `;
 
 export const QUERY_PRODUCT = gql`
@@ -125,7 +138,7 @@ export const QUERY_ORDER = gql`
   }
 `;
 
-export const QUERY_USER = gql`
+export const QUERY_USERS = gql`
   query users {
     _id
     firstName

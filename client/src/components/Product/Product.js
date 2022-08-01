@@ -1,10 +1,38 @@
-import React from "react";
-import dummy_products from "./ProductData";
-import Card from "react-bootstrap/Card";
+import React, { useEffect } from "react";
+import { useStoreContext } from "../../utils/GlobalState";
+import { useQuery } from "@apollo/client";
+import { QUERY_ALL_PRODUCTS } from "../../utils/queries";
 import { Link } from "react-router-dom";
 import classes from "./product.module.css";
+import dummy_products from "./ProductData";
+import Card from "react-bootstrap/Card";
+import { UPDATE_PRODUCTS } from "../../utils/actions";
+import { idbPromise } from "../../utils/helpers";
 
-const Products = ({}) => {
+const Products = ({ product }) => {
+  const [state, dispatch] = useStoreContext();
+
+  const { loading, data } = useQuery(QUERY_ALL_PRODUCTS);
+
+  useEffect(() => {
+    if (data) {
+      dispatch({
+        type: UPDATE_PRODUCTS,
+        products: data.products,
+      });
+      data.products.forEach((product) => {
+        idbPromise("products", "put", product);
+      });
+    } else if (!loading) {
+      idbPromise("products", "get").then((products) => {
+        dispatch({
+          type: UPDATE_PRODUCTS,
+          products: products,
+        });
+      });
+    }
+  }, [data, loading, dispatch]);
+
   //   console.log(dummy_project);
   return (
     <div className={classes["main-container"]}>
@@ -25,6 +53,22 @@ const Products = ({}) => {
         ))}
       </div>
     </div>
+
+    // <Card className="my-3 p-3 rounded">
+    //   {/* <Link to={`/product/${product._id}`}> */}
+    //   <Card.Img src={product.image} variant="top" />
+    //   {/* </Link> */}
+
+    //   <Card.Body>
+    //     {/* <Link to={`/product/${product._id}`}> */}
+    //     <Card.Title as="div">
+    //       <strong>{product.name}</strong>
+    //     </Card.Title>
+    //     {/* </Link> */}
+
+    //     <Card.Text as="h3">${product.price}</Card.Text>
+    //   </Card.Body>
+    // </Card>
   );
 };
 
