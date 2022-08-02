@@ -1,17 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { LOGIN } from "../../utils/mutation";
+import auth, { Auth } from "../../utils/auth";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../../components/Form/FormContainer";
 import classes from "./login.module.css";
 
-const Login = () => {
+const Login = (props) => {
+  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [login, { error }] = useMutation(LOGIN);
+
+  const submitFormHandler = async (event) => {
+    event.preventDefault();
+
+    try {
+      const mutationResponse = await login({
+        variables: { email: formState.email, password: formState.password },
+      });
+
+      const token = mutationResponse.data.login.token;
+      Auth.login(token);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleChange = () => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
   return (
     <FormContainer>
       <div className={classes["main-container"]}>
         <div className={classes.heading}>
           <h1>SIGN IN</h1>
         </div>
-        <Form>
+        <Form onSubmit={submitFormHandler}>
           <Form.Group className="mb-3" controlId="email">
             <Form.Label htmlFor="email">Email Address</Form.Label>
             <Form.Control
@@ -20,6 +49,7 @@ const Login = () => {
               id="email"
               placeholder="Enter email address"
               className={classes.holder}
+              onChange={handleChange}
             />
             <div children={classes.text}>
               <Form.Text className="text-muted">
@@ -36,6 +66,7 @@ const Login = () => {
               placeholder="Password"
               id="pwd"
               className={classes.holder}
+              onChange={handleChange}
             />
           </Form.Group>
           <div className={classes.button}>
