@@ -8,7 +8,14 @@ import FormContainer from "../../components/Form/FormContainer";
 import classes from "./register.module.css";
 
 const RegisterPage = (props) => {
-  const [formState, setFormState] = useState({ email: "", password: "" });
+  const [formState, setFormState] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    // confirmPassword: "",
+    isAdmin: false,
+  });
   const [createUser] = useMutation(CREATE_USER);
 
   const handleFormSubmit = async (event) => {
@@ -20,6 +27,8 @@ const RegisterPage = (props) => {
         lastName: formState.lastName,
         email: formState.email,
         password: formState.password,
+        // confirmPassword: formState.confirmPassword,
+        isAdmin: formState.isAdmin,
       },
     });
 
@@ -43,13 +52,13 @@ const RegisterPage = (props) => {
         </div>
         <Form onSubmit={handleFormSubmit}>
           <div className={classes.title}>
-            <Form.Group controlId="name">
+            <Form.Group>
               <Form.Label htmlFor="firstName">First Name</Form.Label>
               <Form.Control
                 type="firstName"
                 placeholder="First Name"
                 id="firstName"
-                name="fistName"
+                name="firstName"
                 className={classes.holder}
                 onChange={handleChange}
               ></Form.Control>
@@ -57,10 +66,10 @@ const RegisterPage = (props) => {
           </div>
 
           <div className={classes.title}>
-            <Form.Group controlId="name">
+            <Form.Group>
               <Form.Label htmlFor="lastName">Last Name</Form.Label>
               <Form.Control
-                type="name"
+                type="lastName"
                 placeholder="Last Name"
                 id="lastName"
                 name="lastName"
@@ -71,7 +80,7 @@ const RegisterPage = (props) => {
           </div>
 
           <div className={classes.title}>
-            <Form.Group controlId="email">
+            <Form.Group>
               <Form.Label htmlFor="email">Email Address</Form.Label>
               <Form.Control
                 type="email"
@@ -85,32 +94,32 @@ const RegisterPage = (props) => {
           </div>
 
           <div className={classes.title}>
-            <Form.Group controlId="password">
+            <Form.Group>
               <Form.Label htmlFor="pwd">Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Enter password"
                 id="pwd"
-                name="pwd"
+                name="password"
                 className={classes.holder}
                 onChange={handleChange}
               ></Form.Control>
             </Form.Group>
           </div>
 
-          <div className={classes.title}>
-            <Form.Group controlId="confirmPassword">
+          {/* <div className={classes.title}>
+            <Form.Group>
               <Form.Label htmlFor="pwd">Confirm Password</Form.Label>
               <Form.Control
                 type="password"
                 placeholder="Confirm password"
                 id="pwd"
-                name="pwd"
+                name="confirmPassword"
                 className={classes.holder}
                 onChange={handleChange}
               ></Form.Control>
             </Form.Group>
-          </div>
+          </div> */}
 
           <div>
             <Button type="submit" variant="dark">

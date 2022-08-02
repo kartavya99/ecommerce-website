@@ -41,7 +41,7 @@ const Login = (props) => {
           <h1>SIGN IN</h1>
         </div>
         <Form onSubmit={submitFormHandler}>
-          <Form.Group className="mb-3" controlId="email">
+          <Form.Group className="mb-3">
             <Form.Label htmlFor="email">Email Address</Form.Label>
             <Form.Control
               name="email"
@@ -58,7 +58,7 @@ const Login = (props) => {
             </div>
           </Form.Group>
 
-          <Form.Group controlId="password">
+          <Form.Group>
             <Form.Label htmlFor="pwd">Password</Form.Label>
             <Form.Control
               name="password"
@@ -69,6 +69,14 @@ const Login = (props) => {
               onChange={handleChange}
             />
           </Form.Group>
+          {error ? (
+            <div>
+              <p className="error-text">
+                The provided credentials are incorrect
+              </p>
+            </div>
+          ) : null}
+
           <div className={classes.button}>
             <Button type="submit" variant="dark">
               Sign In
