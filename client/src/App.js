@@ -11,11 +11,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import ProductList from "./components/ProductList/ProductList";
 import Footer from "./components/Footer/Footer";
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
+import Login from "./pages/loginPage/Login";
+import Register from "./pages/registerPage/Register";
 import HomePage from "./pages/homePage/HomePage";
 import ProductPage from "./pages/productPage/ProductPage";
-import CartPage from "./pages/cart/CartPage";
+import CartPage from "./pages/cartPage/CartPage";
+import ShippingPage from "./pages/shippingPage/ShippingPage";
 
 //Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -54,7 +55,9 @@ function App() {
             <Route path="/products" element={<ProductList />}></Route>
             <Route path="products/:productId" element={<ProductPage />}></Route>
             <Route path="cart/:id" element={<CartPage />}></Route>
+            <Route path="/shipping" element={<ShippingPage />}></Route>
           </Routes>
+
           <Footer />
         </Router>
       </ApolloProvider>
