@@ -50,7 +50,7 @@ const CartPage = () => {
               <Col me={3}>
                 <Link to={`/product/2`}>{product[0].productName}</Link>
               </Col>
-              <Col md={2}>${product[0].price}</Col>
+              <Col md={2}>{product[0].price}</Col>
               <Col me={2}>
                 <Form.Control as="select" value={product.qty}>
                   2

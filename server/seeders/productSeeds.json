@@ -11,7 +11,7 @@
   {
     "user": "62e787f8f0f291e4aafa43d0",
     "productName": "AirPods (3rd generation)",
-    "image": "/images.aipods3.jpg",
+    "image": "/images/airpods3.jpg",
     "brand": "Apple",
     "description": "AirPods are lightweight and offer a contoured design. They sit at just the right angle for comfort and to better direct audio to your ear. The stem is 33 per cent shorter than AirPods (2nd generation) and includes a force sensor to easily control music and calls.",
     "price": 279.0,
@@ -20,7 +20,7 @@
   {
     "user": "62e787f8f0f291e4aafa43d0",
     "productName": "ASUS CX1 Chromebook CX1500CNA-BR0057",
-    "image": "/images.laptop.jpg",
+    "image": "/images/laptop.jpg",
     "brand": "ASUS",
     "description": "This ASUS Chromebook powers your day with productivity boosting features like powerful, dual-core Intel processors. You can take it on the go with ease, thanks to its lightweight, slim design. Plus, with up to 11 hours of battery life, you can work and play for longer.",
     "price": 447.0,
