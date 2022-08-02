@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
+import Auth from "../../utils/auth";
 import { Container, Nav, Navbar, Form, NavDropdown } from "react-bootstrap";
 import { Link, Route } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
@@ -40,7 +41,12 @@ const Header = (props) => {
               <Nav.Link className={classes["nav-link"]}>SIGN IN</Nav.Link>
             </LinkContainer>
 
-            <Nav.Link className={classes["nav-link"]}>LOGOUT</Nav.Link>
+            <Nav.Link
+              className={classes["nav-link"]}
+              onClick={() => Auth.logout}
+            >
+              LOGOUT
+            </Nav.Link>
             <Nav.Link className={classes["nav-link"]}>PROFILE</Nav.Link>
           </Nav>
         </Container>
