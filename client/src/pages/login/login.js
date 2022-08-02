@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { LOGIN } from "../../utils/mutation";
-import auth, { Auth } from "../../utils/auth";
+import Auth from "../../utils/auth";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../../components/Form/FormContainer";
 import classes from "./login.module.css";
@@ -26,7 +26,7 @@ const Login = (props) => {
     }
   };
 
-  const handleChange = () => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setFormState({
       ...formState,
