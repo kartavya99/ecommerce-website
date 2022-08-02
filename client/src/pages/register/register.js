@@ -11,13 +11,37 @@ const RegisterPage = (props) => {
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [createUser] = useMutation(CREATE_USER);
 
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    const mutationResponse = await createUser({
+      variables: {
+        firstName: formState.firstName,
+        lastName: formState.lastName,
+        email: formState.email,
+        password: formState.password,
+      },
+    });
+
+    const token = mutationResponse.data.createUser.token;
+    Auth.login(token);
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
   return (
     <FormContainer>
       <div className={classes["main-container"]}>
         <div className={classes.heading}>
           <h1>REGISTER</h1>
         </div>
-        <Form>
+        <Form onSubmit={handleFormSubmit}>
           <div className={classes.title}>
             <Form.Group controlId="name">
               <Form.Label htmlFor="firstName">First Name</Form.Label>
@@ -27,6 +51,7 @@ const RegisterPage = (props) => {
                 id="firstName"
                 name="fistName"
                 className={classes.holder}
+                onChange={handleChange}
               ></Form.Control>
             </Form.Group>
           </div>
@@ -40,6 +65,7 @@ const RegisterPage = (props) => {
                 id="lastName"
                 name="lastName"
                 className={classes.holder}
+                onChange={handleChange}
               ></Form.Control>
             </Form.Group>
           </div>
@@ -53,6 +79,7 @@ const RegisterPage = (props) => {
                 id="email"
                 name="email"
                 className={classes.holder}
+                onChange={handleChange}
               ></Form.Control>
             </Form.Group>
           </div>
@@ -66,6 +93,7 @@ const RegisterPage = (props) => {
                 id="pwd"
                 name="pwd"
                 className={classes.holder}
+                onChange={handleChange}
               ></Form.Control>
             </Form.Group>
           </div>
@@ -79,6 +107,7 @@ const RegisterPage = (props) => {
                 id="pwd"
                 name="pwd"
                 className={classes.holder}
+                onChange={handleChange}
               ></Form.Control>
             </Form.Group>
           </div>
