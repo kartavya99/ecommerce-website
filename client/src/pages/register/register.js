@@ -5,7 +5,7 @@ import Auth from "../../utils/auth";
 import { CREATE_USER } from "../../utils/mutation";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../../components/Form/FormContainer";
-import classes from "./register.module.css";
+import classes from "./Register.module.css";
 
 const RegisterPage = (props) => {
   const [formState, setFormState] = useState({

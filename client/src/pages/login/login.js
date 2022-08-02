@@ -5,7 +5,7 @@ import { LOGIN } from "../../utils/mutation";
 import Auth from "../../utils/auth";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../../components/Form/FormContainer";
-import classes from "./login.module.css";
+import classes from "./Login.module.css";
 
 const Login = (props) => {
   const [formState, setFormState] = useState({ email: "", password: "" });

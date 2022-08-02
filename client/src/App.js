@@ -11,10 +11,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import ProductList from "./components/ProductList/ProductList";
 import Footer from "./components/Footer/Footer";
-import Login from "./pages/login/login";
-import Register from "./pages/register/register";
-import HomePage from "./pages/homePage/homePage";
-import ProductPage from "./pages/productPage/productPage";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import HomePage from "./pages/homePage/HomePage";
+import ProductPage from "./pages/productPage/ProductPage";
+import CartPage from "./pages/cart/CartPage";
 
 //Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -52,6 +53,7 @@ function App() {
             <Route path="/register" element={<Register />}></Route>
             <Route path="/products" element={<ProductList />}></Route>
             <Route path="products/:productId" element={<ProductPage />}></Route>
+            <Route path="cart/:id" element={<CartPage />}></Route>
           </Routes>
           <Footer />
         </Router>

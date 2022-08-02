@@ -3,7 +3,7 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_PRODUCTS } from "../../utils/queries";
 // import { Link } from "react-router-dom";
-import classes from "./product.module.css";
+import classes from "./Product.module.css";
 import dummy_products from "./ProductData";
 import Card from "react-bootstrap/Card";
 import { UPDATE_PRODUCTS } from "../../utils/actions";
