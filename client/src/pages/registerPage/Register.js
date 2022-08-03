@@ -16,24 +16,27 @@ const RegisterPage = (props) => {
     // confirmPassword: "",
     isAdmin: false,
   });
-  const [createUser] = useMutation(CREATE_USER);
+  const [createUser, { error }] = useMutation(CREATE_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const mutationResponse = await createUser({
-      variables: {
-        firstName: formState.firstName,
-        lastName: formState.lastName,
-        email: formState.email,
-        password: formState.password,
-        // confirmPassword: formState.confirmPassword,
-        isAdmin: formState.isAdmin,
-      },
-    });
-
-    const token = mutationResponse.data.createUser.token;
-    Auth.login(token);
+    try {
+      const mutationResponse = await createUser({
+        variables: {
+          firstName: formState.firstName,
+          lastName: formState.lastName,
+          email: formState.email,
+          password: formState.password,
+          // confirmPassword: formState.confirmPassword,
+          isAdmin: formState.isAdmin,
+        },
+      });
+      const token = mutationResponse.data.createUser.token;
+      Auth.login(token);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleChange = (event) => {
@@ -120,6 +123,12 @@ const RegisterPage = (props) => {
               ></Form.Control>
             </Form.Group>
           </div> */}
+
+          {error ? (
+            <div>
+              <p className="error-text">Please provided all the details</p>
+            </div>
+          ) : null}
 
           <div>
             <Button type="submit" variant="dark">

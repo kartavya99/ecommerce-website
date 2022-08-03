@@ -31,10 +31,12 @@ const Header = (props) => {
             id="adminmenu"
             className={classes["nav-link"]}
           >
-            <NavDropdown.Item>Users</NavDropdown.Item>
-
-            <NavDropdown.Item>Products</NavDropdown.Item>
-
+            <LinkContainer to="/admin/userlist">
+              <NavDropdown.Item>Users</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="/admin/productlist">
+              <NavDropdown.Item>Products</NavDropdown.Item>
+            </LinkContainer>
             <NavDropdown.Item>Orders</NavDropdown.Item>
           </NavDropdown>
 
