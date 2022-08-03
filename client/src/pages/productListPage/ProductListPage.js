@@ -1,5 +1,6 @@
 import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { Table, Button, Row, Col } from "react-bootstrap";
 import classes from "./ProductListPage.module.css";
 
@@ -9,7 +10,11 @@ function ProductListPage() {
       <Row>
         <Col className={classes.heading}> PRODUCTS</Col>
         <Col className="text-right">
-          <Button className={classes["btn-primary"]}>➕ CREATE PRODUCT</Button>
+          <Link to="admin/product/1/edit">
+            <Button className={classes["btn-primary"]}>
+              ➕ CREATE PRODUCT
+            </Button>
+          </Link>
         </Col>
       </Row>
       <>

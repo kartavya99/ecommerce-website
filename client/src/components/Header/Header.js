@@ -40,22 +40,34 @@ const Header = (props) => {
             <NavDropdown.Item>Orders</NavDropdown.Item>
           </NavDropdown>
 
-          <Nav className="navbar-nav ml-auto d-flex flex-row-reverse">
+          <Nav>
             <LinkContainer to="/cart/:id">
               <Nav.Link className={classes["nav-link"]}>CART</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="login">
-              <Nav.Link className={classes["nav-link"]}>SIGN IN</Nav.Link>
-            </LinkContainer>
-
-            <Nav.Link
-              className={classes["nav-link"]}
-              onClick={() => Auth.logout}
-            >
-              LOGOUT
-            </Nav.Link>
-            <Nav.Link className={classes["nav-link"]}>PROFILE</Nav.Link>
           </Nav>
+
+          {Auth.loggedIn() ? (
+            <Nav className="navbar-nav ml-auto d-flex flex-row-reverse">
+              <Nav.Link
+                to="/"
+                onClick={() => Auth.logout()}
+                className={classes["nav-link"]}
+              >
+                LOGOUT
+              </Nav.Link>
+
+              {/* <LinkContainer to="/cart/:id">
+                <Nav.Link className={classes["nav-link"]}>CART</Nav.Link>
+              </LinkContainer> */}
+              <Nav.Link className={classes["nav-link"]}>PROFILE</Nav.Link>
+            </Nav>
+          ) : (
+            <Nav className="navbar-nav ml-auto d-flex flex-row-reverse">
+              <LinkContainer to="login">
+                <Nav.Link className={classes["nav-link"]}>SIGN IN</Nav.Link>
+              </LinkContainer>
+            </Nav>
+          )}
         </Container>
       </Navbar>
     </header>
