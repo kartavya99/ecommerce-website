@@ -18,13 +18,17 @@ const RenderProductList = ({ data }) => {
       <div style={styles.container}>
         {data.getAllProducts.map((product) => {
           return (
-            <Card className="m-3 p-3 rounded" style={{ width: "18rem" }}>
-              <Link to={`/product/${product._id}`}>
+            <Card
+              className="m-3 p-3 rounded"
+              style={{ width: "18rem" }}
+              key={product.id}
+            >
+              <Link to={`/products/${product._id}`}>
                 <Card.Img src={product.image} variant="top" />
               </Link>
 
               <Card.Body>
-                <Link to={`/product/${product._id}`}>
+                <Link to={`/products/${product._id}`}>
                   <Card.Title as="div">
                     <strong>{product.productName}</strong>
                   </Card.Title>

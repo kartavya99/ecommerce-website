@@ -33,8 +33,8 @@ const styles = {
 };
 
 const ProductPage = () => {
-  console.log(product);
-  console.log(product[0].user);
+  // console.log(product);
+  // console.log(product[0].user);
 
   return (
     <div style={styles.container}>

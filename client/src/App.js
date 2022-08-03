@@ -6,6 +6,7 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { StoreProvider } from "./utils/GlobalState";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header/Header";
@@ -20,6 +21,7 @@ import ShippingPage from "./pages/shippingPage/ShippingPage";
 import UserPageList from "./pages/userPageList/UserPageList";
 import UserEditPage from "./pages/userEditPage/UserEditPage";
 import ProductListPage from "./pages/productListPage/ProductListPage";
+import ProductEditPage from "./pages/productEditPage/ProductEditPage";
 
 //Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -50,27 +52,38 @@ function App() {
     <>
       <ApolloProvider client={client}>
         <Router>
-          <Header />
-          <Routes>
-            <Route path="/" element={<HomePage />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-            <Route path="/products" element={<ProductList />}></Route>
-            <Route path="products/:productId" element={<ProductPage />}></Route>
-            <Route path="cart/:id" element={<CartPage />}></Route>
-            <Route path="/shipping" element={<ShippingPage />}></Route>
-            <Route path="/admin/userlist" element={<UserPageList />}></Route>
-            <Route
-              path="/admin/user/:id/edit"
-              element={<UserEditPage />}
-            ></Route>
-            <Route
-              path="/admin/productlist"
-              element={<ProductListPage />}
-            ></Route>
-          </Routes>
+          <div>
+            {/* <StoreProvider> */}
+            <Header />
+            <Routes>
+              <Route path="/" element={<HomePage />}></Route>
+              <Route path="/login" element={<Login />}></Route>
+              <Route path="/register" element={<Register />}></Route>
+              <Route path="/products" element={<ProductList />}></Route>
+              <Route
+                path="products/:productId"
+                element={<ProductPage />}
+              ></Route>
+              <Route path="cart/:id" element={<CartPage />}></Route>
+              <Route path="/shipping" element={<ShippingPage />}></Route>
+              <Route path="/admin/userlist" element={<UserPageList />}></Route>
+              <Route
+                path="/admin/user/:id/edit"
+                element={<UserEditPage />}
+              ></Route>
+              <Route
+                path="/admin/productlist"
+                element={<ProductListPage />}
+              ></Route>
+              <Route
+                path="admin/product/:id/edit"
+                element={<ProductEditPage />}
+              ></Route>
+            </Routes>
 
-          <Footer />
+            <Footer />
+            {/* </StoreProvider> */}
+          </div>
         </Router>
       </ApolloProvider>
     </>

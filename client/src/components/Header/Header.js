@@ -41,7 +41,9 @@ const Header = (props) => {
           </NavDropdown>
 
           <Nav className="navbar-nav ml-auto d-flex flex-row-reverse">
-            <Nav.Link className={classes["nav-link"]}>CART</Nav.Link>
+            <LinkContainer to="/cart/:id">
+              <Nav.Link className={classes["nav-link"]}>CART</Nav.Link>
+            </LinkContainer>
             <LinkContainer to="login">
               <Nav.Link className={classes["nav-link"]}>SIGN IN</Nav.Link>
             </LinkContainer>
