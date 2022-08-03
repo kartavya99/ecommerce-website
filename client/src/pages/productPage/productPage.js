@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 
 import house from "../../images/house.jpg";
+import classes from "./ProductPage.module.css";
 
 const product = [
   {
@@ -26,21 +27,17 @@ const product = [
   },
 ];
 
-const styles = {
-  container: {
-    minHeight: "100vh",
-  },
-};
-
 const ProductPage = () => {
   // console.log(product);
   // console.log(product[0].user);
 
   return (
-    <div style={styles.container}>
-      <Link className="btn btn-dark m-4" to="/">
-        Go BACK
-      </Link>
+    <div className={classes.container}>
+      <div>
+        <Link className="btn btn-light m-4" to="/">
+          GP BACK
+        </Link>
+      </div>
 
       <Row className=" m-3 pr-5">
         <Col me={6}>

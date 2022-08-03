@@ -7,9 +7,11 @@ import classes from "./ProductEditPage.module.css";
 const ProductEditPage = () => {
   return (
     <div className={classes.container}>
-      <Link to="/admin/productlist" className="btn btn-light my-3">
-        Go Back
-      </Link>
+      <div className={classes.link}>
+        <Link to="/admin/productlist" className="btn btn-light my-3">
+          Go Back
+        </Link>
+      </div>
       <FormContainer>
         <p className={classes.heading}>EDIT PRODUCT</p>
         <Form>

@@ -7,9 +7,11 @@ import classes from "./UserEditPage.module.css";
 const UserEditPage = () => {
   return (
     <div>
-      <Link to="/admin/userlist" className="btn btn-light my-3">
-        Go Back
-      </Link>
+      <div className={classes.link}>
+        <Link to="/admin/userlist" className="btn btn-light">
+          GO Back
+        </Link>
+      </div>
 
       <FormContainer>
         <div>
