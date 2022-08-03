@@ -1,0 +1,32 @@
+.main-container {
+  padding-top: 50px;
+}
+
+.title {
+  padding-bottom: 20px;
+}
+
+.button {
+  margin-top: 20px;
+}
+
+.register {
+  color: black;
+  padding-left: 10px;
+  text-decoration: none;
+}
+
+.holder {
+  background-color: #f8f9fa;
+}
+
+.heading {
+  padding-bottom: 20px;
+}
+
+.btn-primary {
+  color: azure;
+  background-color: black;
+  border: black;
+  border-radius: 0;
+}

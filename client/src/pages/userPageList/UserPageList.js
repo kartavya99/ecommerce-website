@@ -1,12 +1,13 @@
 import React from "react";
 import { Table, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import classes from "./UserPageList.module.css";
 
 const UserPageList = () => {
   return (
-    <div>
-      <div>
-        <h1> USERS LIST</h1>
+    <div className={classes.container}>
+      <div className={classes.heading}>
+        <p> USERS LIST</p>
       </div>
       <Table striped bordered hover responsive className="table-sm">
         <thead>
