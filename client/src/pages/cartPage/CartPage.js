@@ -30,8 +30,6 @@ const product = [
 ];
 
 const CartPage = () => {
-  // console.log(product);
-
   return (
     <div className={classes.container}>
       <Row>

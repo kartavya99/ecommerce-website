@@ -2,6 +2,9 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCT } from "../../utils/queries";
 import Loader from "../../components/Loader/Loader";
+import { useStoreContext } from "../../utils/GlobalState";
+import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
+import { idbPromise } from "../../utils/helpers";
 
 import { Link, useParams } from "react-router-dom";
 import {
@@ -16,7 +19,27 @@ import {
 
 import classes from "./ProductPage.module.css";
 
-const ProductPage = () => {
+const ProductPage = (item) => {
+  const [state, dispatch] = useStoreContext();
+  const { image, productName, _id, price, quantity } = item;
+  const { cart } = state;
+  console.log(cart);
+  const addToCart = () => {
+    const itemInCart = cart.find((cartItem) => cartItem._id === _id);
+    if (itemInCart) {
+      dispatch({
+        type: UPDATE_CART_QUANTITY,
+        _id: _id,
+        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
+      });
+    } else {
+      dispatch({
+        type: ADD_TO_CART,
+        product: { ...item, purchaseQuantity: 1 },
+      });
+    }
+  };
+
   const { id } = useParams();
   const { data, loading } = useQuery(QUERY_PRODUCT, {
     variables: { id },
@@ -69,7 +92,7 @@ const ProductPage = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Status:</Col>
-                  <Col>In Stock</Col>
+                  <Col></Col>
                 </Row>
               </ListGroup.Item>
 
@@ -87,7 +110,11 @@ const ProductPage = () => {
               </ListGroup.Item>
 
               <ListGroup.Item>
-                <Button className="btn btn-dark btn-sm" type="button">
+                <Button
+                  onClick={addToCart}
+                  className="btn btn-dark btn-sm"
+                  type="button"
+                >
                   Add To Cart
                 </Button>
               </ListGroup.Item>

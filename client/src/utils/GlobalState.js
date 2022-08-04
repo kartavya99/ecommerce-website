@@ -4,9 +4,9 @@ import { useProductReducer } from "./reducers";
 const StoreContext = createContext();
 const { Provider } = StoreContext;
 
-const StoreProvider = ({ value = [], props }) => {
+const StoreProvider = ({ value = [], ...props }) => {
   const [state, dispatch] = useProductReducer({
-    products: [],
+    // products: [],
     cart: [],
     currentUser: null,
   });

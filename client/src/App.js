@@ -54,37 +54,40 @@ function App() {
       <ApolloProvider client={client}>
         <Router>
           <div>
-            {/* <StoreProvider> */}
-            <Header />
-            <Routes>
-              <Route path="/" element={<HomePage />}></Route>
-              <Route path="/login" element={<Login />}></Route>
-              <Route path="/register" element={<Register />}></Route>
-              <Route path="/products" element={<ProductList />}></Route>
-              <Route path="products/:id" element={<ProductPage />}></Route>
-              <Route path="cart/:id" element={<CartPage />}></Route>
-              <Route path="/shipping" element={<ShippingPage />}></Route>
-              <Route path="/admin/userlist" element={<UserPageList />}></Route>
-              <Route
-                path="/admin/user/:id/edit"
-                element={<UserEditPage />}
-              ></Route>
-              <Route
-                path="/admin/productlist"
-                element={<ProductListPage />}
-              ></Route>
-              <Route
-                path="admin/product/:id/edit"
-                element={<ProductEditPage />}
-              ></Route>
-              <Route
-                path="admin/product/create"
-                element={<CreateProductPage />}
-              ></Route>
-            </Routes>
+            <StoreProvider>
+              <Header />
+              <Routes>
+                <Route path="/" element={<HomePage />}></Route>
+                <Route path="/login" element={<Login />}></Route>
+                <Route path="/register" element={<Register />}></Route>
+                <Route path="/products" element={<ProductList />}></Route>
+                <Route path="products/:id" element={<ProductPage />}></Route>
+                <Route path="cart/:id" element={<CartPage />}></Route>
+                <Route path="/shipping" element={<ShippingPage />}></Route>
+                <Route
+                  path="/admin/userlist"
+                  element={<UserPageList />}
+                ></Route>
+                <Route
+                  path="/admin/user/:id/edit"
+                  element={<UserEditPage />}
+                ></Route>
+                <Route
+                  path="/admin/productlist"
+                  element={<ProductListPage />}
+                ></Route>
+                <Route
+                  path="admin/product/:id/edit"
+                  element={<ProductEditPage />}
+                ></Route>
+                <Route
+                  path="admin/product/create"
+                  element={<CreateProductPage />}
+                ></Route>
+              </Routes>
 
-            <Footer />
-            {/* </StoreProvider> */}
+              <Footer />
+            </StoreProvider>
           </div>
         </Router>
       </ApolloProvider>
