@@ -6,8 +6,15 @@ import Auth from "../../utils/auth";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../../components/Form/FormContainer";
 import classes from "./Login.module.css";
+import { useStoreContext } from "../../utils/GlobalState";
 
-const Login = (props) => {
+const Login = (user) => {
+  // const [state, dispatch] = useStoreContext;
+  // console.log(state);
+
+  // const { _id, firstName, lastName, email, isAdmin } = user;
+  // console.log(user);
+
   const [formState, setFormState] = useState({ email: "", password: "" });
   const [login, { error }] = useMutation(LOGIN);
 

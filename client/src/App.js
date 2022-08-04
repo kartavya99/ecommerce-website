@@ -22,6 +22,7 @@ import UserPageList from "./pages/userPageList/UserPageList";
 import UserEditPage from "./pages/userEditPage/UserEditPage";
 import ProductListPage from "./pages/productListPage/ProductListPage";
 import ProductEditPage from "./pages/productEditPage/ProductEditPage";
+import CreateProductPage from "./pages/createProductPage/CreateProductPage";
 
 //Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -75,6 +76,10 @@ function App() {
               <Route
                 path="admin/product/:id/edit"
                 element={<ProductEditPage />}
+              ></Route>
+              <Route
+                path="admin/product/create"
+                element={<CreateProductPage />}
               ></Route>
             </Routes>
 

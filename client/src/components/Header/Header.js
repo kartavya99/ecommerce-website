@@ -5,13 +5,13 @@ import { Container, Nav, Navbar, Form, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
+import Loader from "../Loader/Loader";
 
 import classes from "./Header.module.css";
 
 const Header = (props) => {
-  // const { loading, data } = useQuery(QUERY_ME, {
-  //   variables: { id },
-  // });
+  // const { loading, data } = useQuery(QUERY_ME);
+  // if (loading) return <Loader />;
 
   // console.log(data);
 

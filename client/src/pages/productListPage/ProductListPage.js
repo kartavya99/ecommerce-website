@@ -10,11 +10,11 @@ function ProductListPage() {
       <Row>
         <Col className={classes.heading}> PRODUCTS</Col>
         <Col className="text-right">
-          <Link to="admin/product/1/edit">
+          <LinkContainer to={`/admin/product/create`}>
             <Button className={classes["btn-primary"]}>
               ➕ CREATE PRODUCT
             </Button>
-          </Link>
+          </LinkContainer>
         </Col>
       </Row>
       <>
