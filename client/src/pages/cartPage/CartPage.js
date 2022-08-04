@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useStoreContext } from "../../utils/GlobalState";
 import { Link } from "react-router-dom";
 
 import {
@@ -29,7 +30,8 @@ const product = [
 ];
 
 const CartPage = () => {
-  console.log(product);
+  // console.log(product);
+
   return (
     <div className={classes.container}>
       <Row>

@@ -7,7 +7,14 @@ import RenderProductList from "./RenderProductList";
 const ProductList = () => {
   const { data, loading } = useQuery(QUERY_ALL_PRODUCTS);
 
-  return <div>{data && !loading && <RenderProductList data={data} />}</div>;
+  // console.log(data);
+  // console.log(data.getAllProducts._id);
+
+  return (
+    <>
+      <div>{data && !loading && <RenderProductList data={data} />}</div>
+    </>
+  );
 };
 
 export default ProductList;

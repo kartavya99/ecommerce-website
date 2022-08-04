@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
 import {
   Row,
@@ -30,7 +31,7 @@ const product = [
 const ProductPage = () => {
   // console.log(product);
   // console.log(product[0].user);
-
+  // console.log(data);
   return (
     <div className={classes.container}>
       <div>

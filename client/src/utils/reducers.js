@@ -9,6 +9,7 @@ export const reducer = (state, action) => {
         ...state,
         products: [...action.products],
       };
+
     default:
       return state;
   }

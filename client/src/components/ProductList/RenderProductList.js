@@ -12,11 +12,13 @@ const styles = {
 
 const RenderProductList = ({ data }) => {
   // console.log(data);
-  console.log(data.getAllProducts);
+  // console.log(data.getAllProducts);
+
   return (
     <>
       <div style={styles.container}>
         {data.getAllProducts.map((product) => {
+          console.log(product._id);
           return (
             <Card
               className="m-3 p-3 rounded"
