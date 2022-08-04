@@ -24,6 +24,7 @@ const ProductPage = (item) => {
   const { image, productName, _id, price, quantity } = item;
   const { cart } = state;
   console.log(cart);
+
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === _id);
     if (itemInCart) {
@@ -100,11 +101,11 @@ const ProductPage = (item) => {
                 <Row>
                   <Col>Qty</Col>
                   <Col>
-                    <Form.Control as="select">
+                    {/* <Form.Control as="select">
                       <option value="1">1</option>
                       <option value="2">2</option>
                       <option value="3">3</option>
-                    </Form.Control>
+                    </Form.Control> */}
                   </Col>
                 </Row>
               </ListGroup.Item>
@@ -120,6 +121,47 @@ const ProductPage = (item) => {
               </ListGroup.Item>
             </ListGroup>
           </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={6}>
+          <h2 className="m-3">Reviews</h2>
+
+          <ListGroup variant="flush">
+            <ListGroup.Item>
+              <strong>John Doe</strong>
+              <p>04/08/2022</p>
+              <p>review comment </p>
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+              <p>
+                nisl suscipit adipiscing bibendum est ultricies integer quis
+                auctor elit sed vulputate mi sit amet
+              </p>
+
+              <Form>
+                <Form.Group controlId="rating">
+                  <Form.Label>Rating</Form.Label>
+                  <Form.Control as="select">
+                    <option value="">Select...</option>
+                    <option value="1">1 - Poor</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="3">3 - Good</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="5">5 - Excellent</option>
+                  </Form.Control>
+                </Form.Group>
+                <Form.Group controlId="comment">
+                  <Form.Label>Comment</Form.Label>
+                  <Form.Control as="textarea" row="3"></Form.Control>
+                </Form.Group>
+                <Button type="submit" variant="dark" className="my-3">
+                  Submit
+                </Button>
+              </Form>
+            </ListGroup.Item>
+          </ListGroup>
         </Col>
       </Row>
     </div>

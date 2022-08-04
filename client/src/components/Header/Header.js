@@ -6,14 +6,15 @@ import { LinkContainer } from "react-router-bootstrap";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 import Loader from "../Loader/Loader";
+import { useStoreContext } from "../../utils/GlobalState";
 
 import classes from "./Header.module.css";
 
-const Header = (props) => {
-  // const { loading, data } = useQuery(QUERY_ME);
-  // if (loading) return <Loader />;
-
-  // console.log(data);
+const Header = (user) => {
+  const [state, dispatch] = useStoreContext();
+  const { _id, firstName, lastName, email, isAdmin } = user;
+  const { currentUser } = state;
+  console.log(currentUser);
 
   return (
     <header>
@@ -33,6 +34,7 @@ const Header = (props) => {
             />
             <Button variant="outline-secondary">Search</Button>
           </Form>
+
           <NavDropdown
             title="Admin"
             id="adminmenu"
