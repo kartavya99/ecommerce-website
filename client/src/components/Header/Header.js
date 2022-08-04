@@ -2,12 +2,19 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Auth from "../../utils/auth";
 import { Container, Nav, Navbar, Form, NavDropdown } from "react-bootstrap";
-import { Link, Route } from "react-router-dom";
 import { LinkContainer } from "react-router-bootstrap";
+import { useQuery } from "@apollo/client";
+import { QUERY_ME } from "../../utils/queries";
 
 import classes from "./Header.module.css";
 
 const Header = (props) => {
+  // const { loading, data } = useQuery(QUERY_ME, {
+  //   variables: { id },
+  // });
+
+  // console.log(data);
+
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="-xl">

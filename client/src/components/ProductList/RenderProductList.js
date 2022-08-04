@@ -1,14 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
-
-const styles = {
-  container: {
-    minHeight: "100vh",
-    display: "flex",
-    flexWrap: "wrap",
-  },
-};
+import classes from "./Product.module.css";
 
 const RenderProductList = ({ data }) => {
   // console.log(data);
@@ -16,14 +9,14 @@ const RenderProductList = ({ data }) => {
 
   return (
     <>
-      <div style={styles.container}>
+      <div className={classes.container}>
         {data.getAllProducts.map((product) => {
-          console.log(product._id);
+          // console.log(product._id);
           return (
             <Card
               className="m-3 p-3 rounded"
               style={{ width: "18rem" }}
-              key={product.id}
+              key={product._id}
             >
               <Link to={`/products/${product._id}`}>
                 <Card.Img src={product.image} variant="top" />

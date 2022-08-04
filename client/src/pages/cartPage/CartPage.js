@@ -54,8 +54,8 @@ const CartPage = () => {
               </Col>
               <Col md={2}>{product[0].price}</Col>
               <Col me={2}>
-                <Form.Control as="select" value={product.qty}>
-                  2
+                <Form.Control as="select" value={product.countInStock}>
+                  {product.countInStock}
                 </Form.Control>
               </Col>
               <Col md={2}>

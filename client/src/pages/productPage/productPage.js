@@ -1,6 +1,9 @@
 import React from "react";
+import { useQuery } from "@apollo/client";
+import { QUERY_PRODUCT } from "../../utils/queries";
+import Loader from "../../components/Loader/Loader";
 
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   Row,
   Col,
@@ -11,27 +14,18 @@ import {
   Form,
 } from "react-bootstrap";
 
-import house from "../../images/house.jpg";
 import classes from "./ProductPage.module.css";
 
-const product = [
-  {
-    _id: "p1",
-    user: "user1",
-    productName: "5-bed room house",
-    image: house,
-    brand: "NewBrand",
-    description:
-      "vitae tempus quam pellentesque nec nam aliquam sem et tortor consequat id porta nibh venenatis",
-    price: "1,000,000",
-    countInStock: 5,
-  },
-];
-
 const ProductPage = () => {
-  // console.log(product);
-  // console.log(product[0].user);
+  const { id } = useParams();
+  const { data, loading } = useQuery(QUERY_PRODUCT, {
+    variables: { id },
+  });
+  if (loading) return <Loader />;
+
   // console.log(data);
+  // console.log(data.product);
+
   return (
     <div className={classes.container}>
       <div>
@@ -42,16 +36,20 @@ const ProductPage = () => {
 
       <Row className=" m-3 pr-5">
         <Col me={6}>
-          <Image src={product[0].image} alt={product[0].productName} fluid />
+          <Image
+            src={data.product.image}
+            alt={data.product.productName}
+            fluid
+          />
         </Col>
         <Col md={3}>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h3>{product[0].productName}</h3>
+              <h3>{data.product.productName}</h3>
             </ListGroup.Item>
-            <ListGroup.Item>Price: ${product[0].price}</ListGroup.Item>
+            <ListGroup.Item>Price: ${data.product.price}</ListGroup.Item>
             <ListGroup.Item>
-              Description: {product[0].description}
+              Description: {data.product.description}
             </ListGroup.Item>
           </ListGroup>
         </Col>
@@ -63,7 +61,7 @@ const ProductPage = () => {
                 <Row>
                   <Col>Price:</Col>
                   <Col>
-                    <strong>${product[0].price}</strong>
+                    <strong>${data.product.price}</strong>
                   </Col>
                 </Row>
               </ListGroup.Item>
