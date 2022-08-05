@@ -49,6 +49,7 @@ const ProductPage = (item) => {
 
   // console.log(data);
   // console.log(data.product);
+  console.log(data.product.countInStock);
 
   return (
     <div className={classes.container}>
@@ -93,7 +94,11 @@ const ProductPage = (item) => {
               <ListGroup.Item>
                 <Row>
                   <Col>Status:</Col>
-                  <Col></Col>
+                  <Col>
+                    {data.product.countInStock > 0
+                      ? "In Stock"
+                      : "Out of Stock"}
+                  </Col>
                 </Row>
               </ListGroup.Item>
 
@@ -101,6 +106,7 @@ const ProductPage = (item) => {
                 <Row>
                   <Col>Qty</Col>
                   <Col>
+                    {data.product.countInStock}
                     {/* <Form.Control as="select">
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -115,6 +121,7 @@ const ProductPage = (item) => {
                   onClick={addToCart}
                   className="btn btn-dark btn-sm"
                   type="button"
+                  disabled={data.product.countInStock === 0}
                 >
                   Add To Cart
                 </Button>
