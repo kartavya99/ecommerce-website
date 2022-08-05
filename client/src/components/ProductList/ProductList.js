@@ -5,20 +5,22 @@ import { QUERY_ALL_PRODUCTS } from "../../utils/queries";
 import { UPDATE_PRODUCTS } from "../../utils/actions";
 import RenderProductList from "./RenderProductList";
 import { idbPromise } from "../../utils/helpers";
+import Loader from "../Loader/Loader";
 
 const ProductList = () => {
   const [state, dispatch] = useStoreContext();
-  const { products } = state;
+
   const { data, loading } = useQuery(QUERY_ALL_PRODUCTS);
 
   useEffect(() => {
-    if (data) {
-      console.log(data);
+    if (loading) {
+      <Loader />;
+    } else if (data) {
       dispatch({
         type: UPDATE_PRODUCTS,
-        products: data.getAllProducts,
+        products: data,
       });
-      data.products.forEach((product) => {
+      data.getAllProducts.forEach((product) => {
         idbPromise("products", "put", product);
       });
     } else if (!loading) {
@@ -29,14 +31,11 @@ const ProductList = () => {
         });
       });
     }
-  }, [data, loading, dispatch, products]);
-
-  // console.log(data);
-  // console.log(data.getAllProducts._id);
+  }, [data, loading, dispatch]);
 
   return (
     <>
-      <div>{data && !loading && <RenderProductList data={products} />}</div>
+      <div>{data && !loading && <RenderProductList data={data} />}</div>
     </>
   );
 };

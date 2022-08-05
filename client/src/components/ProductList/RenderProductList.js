@@ -4,13 +4,10 @@ import { Card } from "react-bootstrap";
 import classes from "./Product.module.css";
 
 const RenderProductList = ({ data }) => {
-  console.log(data);
-  console.log(data.getAllProducts);
-
   return (
     <>
       <div className={classes.container}>
-        {data.map((product) => {
+        {data.getAllProducts.map((product) => {
           // console.log(product._id);
           return (
             <Card

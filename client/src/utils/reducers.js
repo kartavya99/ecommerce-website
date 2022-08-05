@@ -13,7 +13,7 @@ export const reducer = (state, action) => {
     case UPDATE_PRODUCTS:
       return {
         ...state,
-        products: [...state.product, action.products],
+        products: [...state.products, action.products],
       };
 
     case ADD_TO_CART:

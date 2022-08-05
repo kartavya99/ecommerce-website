@@ -12,12 +12,6 @@ import { useStoreContext } from "../../utils/GlobalState";
 import classes from "./Header.module.css";
 
 const Header = (user) => {
-  const [state, dispatch] = useStoreContext();
-  const { _id, firstName, lastName, email, isAdmin } = user;
-  const { currentUser } = state;
-  console.log(currentUser);
-  console.log(Auth.admin());
-
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="-xl">
