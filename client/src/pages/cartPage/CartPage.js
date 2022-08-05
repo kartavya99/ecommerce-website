@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useStoreContext } from "../../utils/GlobalState";
 import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { ADD_TO_CART } from "../../utils/actions";
 
 import {
   Row,
@@ -30,6 +32,15 @@ const product = [
 ];
 
 const CartPage = () => {
+  const [state, dispatch] = useStoreContext();
+  const { cart } = state;
+  console.log(cart);
+
+  const [total, setTotal] = useState();
+  useEffect(() => {
+    setTotal(cart.reduce((acc, curr) => acc + Number(curr.price), 0));
+  }, [cart]);
+
   return (
     <div className={classes.container}>
       <Row>
@@ -51,11 +62,7 @@ const CartPage = () => {
                 <Link to={`/product/2`}>{product[0].productName}</Link>
               </Col>
               <Col md={2}>{product[0].price}</Col>
-              <Col me={2}>
-                <Form.Control as="select" value={product.countInStock}>
-                  {product.countInStock}
-                </Form.Control>
-              </Col>
+              <Col me={2}>Quantity : 2</Col>
               <Col md={2}>
                 <Button type="button" variant="light">
                   Remove<i className="fas fa-trash"></i>
@@ -68,7 +75,7 @@ const CartPage = () => {
           <Card>
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <h2 className={classes.h2}>Subtotal (2) items</h2>$ 100.00
+                <h2 className={classes.h2}>Subtotal items</h2>$ {total}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button type="button" className={classes["btn-primary"]}>

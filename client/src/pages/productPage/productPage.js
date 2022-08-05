@@ -4,7 +4,6 @@ import { QUERY_PRODUCT } from "../../utils/queries";
 import Loader from "../../components/Loader/Loader";
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
-import { idbPromise } from "../../utils/helpers";
 
 import { Link, useParams } from "react-router-dom";
 import {
@@ -49,7 +48,7 @@ const ProductPage = (item) => {
 
   // console.log(data);
   // console.log(data.product);
-  console.log(data.product.countInStock);
+  // console.log(data.product.countInStock);
 
   return (
     <div className={classes.container}>
@@ -102,19 +101,14 @@ const ProductPage = (item) => {
                 </Row>
               </ListGroup.Item>
 
-              <ListGroup.Item>
-                <Row>
-                  <Col>Qty</Col>
-                  <Col>
-                    {data.product.countInStock}
-                    {/* <Form.Control as="select">
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                    </Form.Control> */}
-                  </Col>
-                </Row>
-              </ListGroup.Item>
+              {data.product.countInStock > 0 && (
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Qty</Col>
+                    <Col>{data.product.countInStock}</Col>
+                  </Row>
+                </ListGroup.Item>
+              )}
 
               <ListGroup.Item>
                 <Button
