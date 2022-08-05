@@ -6,6 +6,7 @@ import {
   UPDATE_CART_QUANTITY,
   REMOVE_FROM_CART,
   ADD_MULTIPLE_TO_CART,
+  UPDATE_USER,
 } from "./actions";
 
 export const reducer = (state, action) => {
@@ -44,6 +45,12 @@ export const reducer = (state, action) => {
       return {
         ...state,
         cart: newState,
+      };
+
+    case UPDATE_USER:
+      return {
+        ...state,
+        user: [...state.user, action.user],
       };
 
     default:
