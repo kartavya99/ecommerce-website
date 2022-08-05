@@ -7,6 +7,8 @@ import { useQuery, useSubscription } from "@apollo/client";
 import { useStoreContext } from "../../utils/GlobalState";
 import { QUERY_ALL_PRODUCTS } from "../../utils/queries";
 import Loader from "../../components/Loader/Loader";
+import { BsTrash } from "react-icons/bs";
+import { BsFileEarmarkDiffFill } from "react-icons/bs";
 
 function ProductListPage() {
   const [state, dispatch] = useStoreContext();
@@ -63,11 +65,11 @@ function ProductListPage() {
                   <td>
                     <LinkContainer to={`/admin/product/1/edit`}>
                       <Button variant="light" className="btn-sm">
-                        ⏏️
+                        <BsFileEarmarkDiffFill />
                       </Button>
                     </LinkContainer>
-                    <Button variant="danger" className="btn-sm">
-                      👎
+                    <Button variant="light" className="btn-sm">
+                      <BsTrash />
                     </Button>
                   </td>
                 </tr>
