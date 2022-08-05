@@ -2,6 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Auth from "../../utils/auth";
 import { Container, Nav, Navbar, Form, NavDropdown } from "react-bootstrap";
+import { BsCartCheck } from "react-icons/bs";
 import { LinkContainer } from "react-router-bootstrap";
 import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
@@ -15,6 +16,7 @@ const Header = (user) => {
   const { _id, firstName, lastName, email, isAdmin } = user;
   const { currentUser } = state;
   console.log(currentUser);
+  console.log(Auth.admin());
 
   return (
     <header>
@@ -34,27 +36,33 @@ const Header = (user) => {
             />
             <Button variant="outline-secondary">Search</Button>
           </Form>
-
-          <NavDropdown
-            title="Admin"
-            id="adminmenu"
-            className={classes["nav-link"]}
-          >
-            <LinkContainer to="/admin/userlist">
-              <NavDropdown.Item>Users</NavDropdown.Item>
-            </LinkContainer>
-            <LinkContainer to="/admin/productlist">
-              <NavDropdown.Item>Products</NavDropdown.Item>
-            </LinkContainer>
-            <NavDropdown.Item>Orders</NavDropdown.Item>
-          </NavDropdown>
-
+          {Auth.admin() === "true" ? (
+            <NavDropdown
+              title="Admin"
+              id="adminmenu"
+              className={classes["nav-link"]}
+            >
+              <LinkContainer to="/admin/userlist">
+                <NavDropdown.Item>Users</NavDropdown.Item>
+              </LinkContainer>
+              <LinkContainer to="/admin/productlist">
+                <NavDropdown.Item>Products</NavDropdown.Item>
+              </LinkContainer>
+              <NavDropdown.Item>Orders</NavDropdown.Item>
+            </NavDropdown>
+          ) : (
+            ``
+          )}
+          ;
           <Nav>
             <LinkContainer to="/cart/:id">
-              <Nav.Link className={classes["nav-link"]}>CART</Nav.Link>
+              <Nav.Link className={classes["nav-link"]}>
+                {" "}
+                <BsCartCheck />
+                CART
+              </Nav.Link>
             </LinkContainer>
           </Nav>
-
           {Auth.loggedIn() ? (
             <Nav className="navbar-nav ml-auto d-flex flex-row-reverse">
               <Nav.Link

@@ -25,9 +25,12 @@ const Login = (user) => {
       const mutationResponse = await login({
         variables: { email: formState.email, password: formState.password },
       });
+      console.log(mutationResponse.data.login);
+      console.log(mutationResponse.data.login.user);
 
+      const isAdmin = mutationResponse.data.login.user.isAdmin;
       const token = mutationResponse.data.login.token;
-      Auth.login(token);
+      Auth.login(token, isAdmin);
     } catch (err) {
       console.log(err);
     }
