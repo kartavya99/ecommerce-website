@@ -8,6 +8,8 @@ import { QUERY_USERS } from "../../utils/queries";
 import { UPDATE_USER } from "../../utils/actions";
 import Loader from "../../components/Loader/Loader";
 
+// define a user so that user doesn't get added multiple times
+
 const UserPageList = () => {
   const [state, dispatch] = useStoreContext();
   const { user } = state;

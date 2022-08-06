@@ -33,7 +33,9 @@ const product = [
 
 const CartPage = () => {
   const [state, dispatch] = useStoreContext();
-  const { cart } = state;
+  const { cart, products } = state;
+  // get get product and quantity
+  // pass the user id to match
   console.log(cart);
 
   const [total, setTotal] = useState();

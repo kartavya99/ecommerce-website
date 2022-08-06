@@ -6,6 +6,8 @@ import { UPDATE_PRODUCTS } from "../../utils/actions";
 import RenderProductList from "./RenderProductList";
 import { idbPromise } from "../../utils/helpers";
 import Loader from "../Loader/Loader";
+import Auth from "../../utils/auth";
+import { USER_TO_STATE } from "../../utils/actions";
 
 const ProductList = () => {
   const [state, dispatch] = useStoreContext();
@@ -17,6 +19,7 @@ const ProductList = () => {
     if (loading) {
       <Loader />;
     } else if (data) {
+      console.log(data);
       dispatch({
         type: UPDATE_PRODUCTS,
         products: data,
@@ -30,6 +33,14 @@ const ProductList = () => {
           type: UPDATE_PRODUCTS,
           products: products,
         });
+      });
+    }
+    if (Auth.getToken()) {
+      console.log(Auth.getProfile());
+
+      dispatch({
+        type: USER_TO_STATE,
+        user: Auth.getProfile(),
       });
     }
   }, [data, loading, dispatch]);

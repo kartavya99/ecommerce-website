@@ -7,6 +7,7 @@ import {
   REMOVE_FROM_CART,
   ADD_MULTIPLE_TO_CART,
   UPDATE_USER,
+  USER_TO_STATE,
 } from "./actions";
 
 export const reducer = (state, action) => {
@@ -48,6 +49,13 @@ export const reducer = (state, action) => {
       };
 
     case UPDATE_USER:
+      return {
+        ...state,
+        user: [...state.user, action.user],
+      };
+
+    case USER_TO_STATE:
+      console.log("inside the user state");
       return {
         ...state,
         user: [...state.user, action.user],
