@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import { ADD_TO_CART } from "../../utils/actions";
 import Auth from "../../utils/auth";
 import { USER_TO_STATE } from "../../utils/actions";
+import { useQuery } from "@apollo/client";
+import { QUERY_ALL_PRODUCTS } from "../../utils/queries";
+import Loader from "../../components/Loader/Loader";
 
 import {
   Row,
@@ -32,16 +35,24 @@ const product = [
   },
 ];
 
-const CartPage = () => {
+const CartPage = ({ match, location }) => {
   const [state, dispatch] = useStoreContext();
+  const { data, loading } = useQuery(QUERY_ALL_PRODUCTS);
   const { cart, products } = state;
   console.log(products);
   // get get product and quantity
   // pass the user id to match
   console.log(cart);
+  // const productId = match.params.id;
+  // console.log(productId);
 
   const [total, setTotal] = useState();
   useEffect(() => {
+    if (data) {
+      console.log(data);
+      console.log(data.getAllProducts);
+    }
+
     if (Auth.getToken()) {
       console.log(Auth.getProfile());
 
@@ -51,7 +62,7 @@ const CartPage = () => {
       });
     }
     setTotal(cart.reduce((acc, curr) => acc + Number(curr.price), 0));
-  }, [cart, dispatch]);
+  }, [cart, dispatch, data]);
 
   return (
     <div className={classes.container}>

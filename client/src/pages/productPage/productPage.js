@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCT } from "../../utils/queries";
 import Loader from "../../components/Loader/Loader";
@@ -18,38 +19,25 @@ import {
 
 import classes from "./ProductPage.module.css";
 
-const ProductPage = (item) => {
+const ProductPage = (item, { match }) => {
   const [qty, setQty] = useState(1);
   const [state, dispatch] = useStoreContext();
   const { image, productName, _id, price, quantity } = item;
-  const { cart } = state;
+  const { cart, products } = state;
   console.log(cart);
-
-  const addToCart = () => {
-    const itemInCart = cart.find((cartItem) => cartItem._id === _id);
-    if (itemInCart) {
-      dispatch({
-        type: UPDATE_CART_QUANTITY,
-        _id: _id,
-        purchaseQuantity: parseInt(itemInCart.purchaseQuantity) + 1,
-      });
-    } else {
-      dispatch({
-        type: ADD_TO_CART,
-        product: { ...item, purchaseQuantity: 1 },
-      });
-    }
-  };
+  console.log(products);
+  const history = useNavigate();
 
   const { id } = useParams();
   const { data, loading } = useQuery(QUERY_PRODUCT, {
     variables: { id },
   });
   if (loading) return <Loader />;
+  console.log(data.product._id);
 
-  // console.log(data);
-  // console.log(data.product);
-  // console.log(data.product.countInStock);
+  const addToCart = () => {
+    history(`/cart/${data.product._id}`);
+  };
 
   return (
     <div className={classes.container}>
