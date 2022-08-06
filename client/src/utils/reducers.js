@@ -55,7 +55,7 @@ export const reducer = (state, action) => {
       };
 
     case USER_TO_STATE:
-      console.log("inside the user state");
+      // console.log("inside the user state");
       return {
         ...state,
         user: [...state.user, action.user],

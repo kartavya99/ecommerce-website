@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useStoreContext } from "../../utils/GlobalState";
 import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
 import { ADD_TO_CART } from "../../utils/actions";
+import Auth from "../../utils/auth";
+import { USER_TO_STATE } from "../../utils/actions";
 
 import {
   Row,
@@ -34,14 +35,23 @@ const product = [
 const CartPage = () => {
   const [state, dispatch] = useStoreContext();
   const { cart, products } = state;
+  console.log(products);
   // get get product and quantity
   // pass the user id to match
   console.log(cart);
 
   const [total, setTotal] = useState();
   useEffect(() => {
+    if (Auth.getToken()) {
+      console.log(Auth.getProfile());
+
+      dispatch({
+        type: USER_TO_STATE,
+        user: Auth.getProfile(),
+      });
+    }
     setTotal(cart.reduce((acc, curr) => acc + Number(curr.price), 0));
-  }, [cart]);
+  }, [cart, dispatch]);
 
   return (
     <div className={classes.container}>

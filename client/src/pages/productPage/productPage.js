@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCT } from "../../utils/queries";
 import Loader from "../../components/Loader/Loader";
@@ -19,6 +19,7 @@ import {
 import classes from "./ProductPage.module.css";
 
 const ProductPage = (item) => {
+  const [qty, setQty] = useState(1);
   const [state, dispatch] = useStoreContext();
   const { image, productName, _id, price, quantity } = item;
   const { cart } = state;
@@ -105,7 +106,18 @@ const ProductPage = (item) => {
                 <ListGroup.Item>
                   <Row>
                     <Col>Qty</Col>
-                    <Col>{data.product.countInStock}</Col>
+                    <Form.Control
+                      as="select"
+                      value={qty}
+                      onChange={(e) => setQty(e.target.value)}
+                    >
+                      {[...Array(data.product.countInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
+                    </Form.Control>
+                    {/* <Col>{data.product.countInStock}</Col> */}
                   </Row>
                 </ListGroup.Item>
               )}

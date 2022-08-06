@@ -19,7 +19,7 @@ const ProductList = () => {
     if (loading) {
       <Loader />;
     } else if (data) {
-      console.log(data);
+      // console.log(data);
       dispatch({
         type: UPDATE_PRODUCTS,
         products: data,
