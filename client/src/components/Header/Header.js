@@ -8,6 +8,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_ME } from "../../utils/queries";
 import Loader from "../Loader/Loader";
 import { useStoreContext } from "../../utils/GlobalState";
+import HeaderCartButton from "../HeaderCartButton/HeaderCartButton";
 
 import classes from "./Header.module.css";
 
@@ -56,6 +57,9 @@ const Header = (user) => {
                 CART
               </Nav.Link>
             </LinkContainer>
+          </Nav>
+          <Nav>
+            <HeaderCartButton />
           </Nav>
           {Auth.loggedIn() ? (
             <Nav className="navbar-nav ml-auto d-flex flex-row-reverse">
