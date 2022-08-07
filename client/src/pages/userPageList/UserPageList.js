@@ -18,22 +18,20 @@ const UserPageList = () => {
 
   const { loading, data } = useQuery(QUERY_USERS);
   const [deleteUser, { error }] = useMutation(DELETE_USER);
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     if (loading) {
       <Loader />;
     } else if (data) {
-      console.log(data);
-      console.log(data.users.users);
-
+      // console.log(data);
       dispatch({
-        type: UPDATE_USER,
+        type: USER_DELETE_REQUEST,
         users: data,
       });
 
       dispatch({
-        type: USER_DELETE_REQUEST,
+        type: UPDATE_USER,
         users: data,
       });
     }
@@ -86,7 +84,7 @@ const UserPageList = () => {
                           </Button>
                         </LinkContainer>
                         <Button
-                          onClick={deleteUserHandler}
+                          onClick={() => deleteUserHandler(user._id)}
                           variant="danger"
                           className="btn-sm"
                         >

@@ -110,7 +110,7 @@ const resolvers = {
 
     deleteUser: async (parent, { _id }, context) => {
       if (context.user.isAdmin) {
-        await User.findByIdAndDelete(_id);
+        return await User.findByIdAndDelete(_id);
       }
       throw new AuthenticationError("Only Admin can delete user");
     },

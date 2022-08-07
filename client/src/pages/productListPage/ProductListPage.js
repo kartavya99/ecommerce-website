@@ -90,7 +90,7 @@ function ProductListPage() {
                           </Button>
                         </LinkContainer>
                         <Button
-                          onClick={deleteProductHandler}
+                          onClick={() => deleteProductHandler(product._id)}
                           variant="light"
                           className="btn-sm"
                         >

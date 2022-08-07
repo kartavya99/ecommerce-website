@@ -137,7 +137,7 @@ const typeDefs = gql`
       isAdmin: Boolean
     ): User
     deleteUser(_id: ID!): User
-    deleteProduct(_id: ID): Product
+    deleteProduct(_id: ID!): Product
     createOrder(
       orderItems: [OrderItemInput]!
       shippingAddress: ShippingInput!
