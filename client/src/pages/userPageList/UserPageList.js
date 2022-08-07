@@ -5,32 +5,47 @@ import classes from "./UserPageList.module.css";
 import { useQuery } from "@apollo/client";
 import { useStoreContext } from "../../utils/GlobalState";
 import { QUERY_USERS } from "../../utils/queries";
-import { UPDATE_USER } from "../../utils/actions";
+import { UPDATE_USER, USER_DELETE_REQUEST } from "../../utils/actions";
 import Loader from "../../components/Loader/Loader";
+import { DELETE_USER } from "../../utils/mutation";
+import { useMutation } from "@apollo/client";
 
 // define a user so that user doesn't get added multiple times
 
 const UserPageList = () => {
   const [state, dispatch] = useStoreContext();
   const { user } = state;
-  // console.log(user);
 
   const { loading, data } = useQuery(QUERY_USERS);
-  // console.log(data);
+  console.log(data);
 
   useEffect(() => {
     if (loading) {
       <Loader />;
-    } else if (data) {
-      // console.log(data.users);
+    } else if ({ data }) {
+      console.log(data.users);
+      console.log(data.users._id);
 
       dispatch({
         type: UPDATE_USER,
         users: data,
       });
-      console.log(data);
     }
   }, [data, loading, dispatch]);
+
+  const [deleteUser, { error }] = useMutation(DELETE_USER);
+
+  const deleteUserHandler = async () => {
+    try {
+      await deleteUser({
+        variables: {
+          ID: data.users._id,
+        },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -68,7 +83,11 @@ const UserPageList = () => {
                             <i className="fas fa-edit">EDIT</i>
                           </Button>
                         </LinkContainer>
-                        <Button variant="danger" className="btn-sm">
+                        <Button
+                          variant="danger"
+                          className="btn-sm"
+                          onClick={deleteUserHandler}
+                        >
                           <i className="fas fa-trash"> DELETE</i>
                         </Button>
                       </td>

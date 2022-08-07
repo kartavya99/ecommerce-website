@@ -8,6 +8,7 @@ import {
   ADD_MULTIPLE_TO_CART,
   UPDATE_USER,
   USER_TO_STATE,
+  USER_DELETE_REQUEST,
 } from "./actions";
 
 export const reducer = (state, action) => {
