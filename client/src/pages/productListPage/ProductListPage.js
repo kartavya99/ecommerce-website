@@ -9,9 +9,13 @@ import { QUERY_ALL_PRODUCTS } from "../../utils/queries";
 import Loader from "../../components/Loader/Loader";
 import { BsTrash } from "react-icons/bs";
 import { BsFileEarmarkDiffFill } from "react-icons/bs";
+import { useMutation } from "@apollo/client";
+import { DELETE_PRODUCT } from "../../utils/mutation";
+import { PRODUCT_DELETE_REQUEST } from "../../utils/actions";
 
 function ProductListPage() {
   const [state, dispatch] = useStoreContext();
+  const [deleteProduct, { error }] = useMutation(DELETE_PRODUCT);
 
   const { data, loading } = useQuery(QUERY_ALL_PRODUCTS);
   // const products = data?.products || [];
@@ -23,10 +27,25 @@ function ProductListPage() {
     } else {
       const product = data;
       console.log(product);
+
+      dispatch({
+        type: PRODUCT_DELETE_REQUEST,
+        products: data,
+      });
     }
-  }, [data, loading]);
+  }, [data, loading, dispatch]);
   // console.log(data);
   // console.log(data.getAllProducts);
+
+  const deleteProductHandler = async (id) => {
+    try {
+      const { data } = await deleteProduct({
+        variables: { id },
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div>
@@ -70,7 +89,11 @@ function ProductListPage() {
                             <BsFileEarmarkDiffFill />
                           </Button>
                         </LinkContainer>
-                        <Button variant="light" className="btn-sm">
+                        <Button
+                          onClick={deleteProductHandler}
+                          variant="light"
+                          className="btn-sm"
+                        >
                           <BsTrash />
                         </Button>
                       </td>

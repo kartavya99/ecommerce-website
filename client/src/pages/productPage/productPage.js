@@ -22,20 +22,22 @@ const ProductPage = (item, { match }) => {
   const [qty, setQty] = useState(1);
   const [state, dispatch] = useStoreContext();
   const { cart, products } = state;
+
   console.log(cart);
   // console.log(products);
+  const { id } = useParams();
+  const { data, loading } = useQuery(QUERY_PRODUCT, {
+    variables: { id },
+  });
   const history = useNavigate();
+
+  if (loading) return <Loader />;
+  console.log(data.product._id);
 
   const addToCart = () => {
     history(`/cart/${data.product._id}`);
   };
 
-  const { id } = useParams();
-  const { data, loading } = useQuery(QUERY_PRODUCT, {
-    variables: { id },
-  });
-  if (loading) return <Loader />;
-  console.log(data.product._id);
   return (
     <div className={classes.container}>
       <div>

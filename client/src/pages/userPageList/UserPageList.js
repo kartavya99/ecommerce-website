@@ -17,30 +17,32 @@ const UserPageList = () => {
   const { user } = state;
 
   const { loading, data } = useQuery(QUERY_USERS);
+  const [deleteUser, { error }] = useMutation(DELETE_USER);
   console.log(data);
 
   useEffect(() => {
     if (loading) {
       <Loader />;
-    } else if ({ data }) {
-      console.log(data.users);
-      console.log(data.users._id);
+    } else if (data) {
+      console.log(data);
+      console.log(data.users.users);
 
       dispatch({
         type: UPDATE_USER,
         users: data,
       });
+
+      dispatch({
+        type: USER_DELETE_REQUEST,
+        users: data,
+      });
     }
   }, [data, loading, dispatch]);
 
-  const [deleteUser, { error }] = useMutation(DELETE_USER);
-
-  const deleteUserHandler = async () => {
+  const deleteUserHandler = async (id) => {
     try {
-      await deleteUser({
-        variables: {
-          ID: data.users._id,
-        },
+      const { data } = await deleteUser({
+        variables: { id },
       });
     } catch (err) {
       console.log(err);
@@ -84,9 +86,9 @@ const UserPageList = () => {
                           </Button>
                         </LinkContainer>
                         <Button
+                          onClick={deleteUserHandler}
                           variant="danger"
                           className="btn-sm"
-                          onClick={deleteUserHandler}
                         >
                           <i className="fas fa-trash"> DELETE</i>
                         </Button>
