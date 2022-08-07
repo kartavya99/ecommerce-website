@@ -139,40 +139,13 @@ export const QUERY_ORDER = gql`
 `;
 
 export const QUERY_USERS = gql`
-  query users {
-    _id
-    firstName
-    lastName
-    email
-    isAdmin
-    isCreatedAt
-    orders {
+  query Query {
+    users {
       _id
-      orderItems {
-        productName
-        quantity
-        image
-        price
-      }
-      shippingAddress {
-        address
-        city
-        postCode
-        country
-      }
-      paymentMethod
-      paymentResult {
-        _id
-        status
-        update_time
-        email_address
-      }
-      totalPrice
-      taxPrice
-      shippingPrice
-      isPaid
-      paidAt
-      isDelivered
+      firstName
+      lastName
+      email
+      isAdmin
     }
   }
 `;

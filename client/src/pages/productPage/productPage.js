@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_PRODUCT } from "../../utils/queries";
 import Loader from "../../components/Loader/Loader";
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 
-import { Link, useParams } from "react-router-dom";
 import {
   Row,
   Col,
@@ -22,11 +21,14 @@ import classes from "./ProductPage.module.css";
 const ProductPage = (item, { match }) => {
   const [qty, setQty] = useState(1);
   const [state, dispatch] = useStoreContext();
-  const { image, productName, _id, price, quantity } = item;
   const { cart, products } = state;
   console.log(cart);
-  console.log(products);
+  // console.log(products);
   const history = useNavigate();
+
+  const addToCart = () => {
+    history(`/cart/${data.product._id}`);
+  };
 
   const { id } = useParams();
   const { data, loading } = useQuery(QUERY_PRODUCT, {
@@ -34,11 +36,6 @@ const ProductPage = (item, { match }) => {
   });
   if (loading) return <Loader />;
   console.log(data.product._id);
-
-  const addToCart = () => {
-    history(`/cart/${data.product._id}`);
-  };
-
   return (
     <div className={classes.container}>
       <div>

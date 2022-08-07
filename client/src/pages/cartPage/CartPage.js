@@ -39,7 +39,7 @@ const CartPage = ({ match, location }) => {
   const [state, dispatch] = useStoreContext();
   const { data, loading } = useQuery(QUERY_ALL_PRODUCTS);
   const { cart, products } = state;
-  console.log(products);
+  // console.log(products);
   // get get product and quantity
   // pass the user id to match
   console.log(cart);
@@ -49,8 +49,8 @@ const CartPage = ({ match, location }) => {
   const [total, setTotal] = useState();
   useEffect(() => {
     if (data) {
-      console.log(data);
-      console.log(data.getAllProducts);
+      // console.log(data);
+      // console.log(data.getAllProducts);
     }
 
     if (Auth.getToken()) {
