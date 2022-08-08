@@ -9,6 +9,8 @@ import { UPDATE_USER, USER_DELETE_REQUEST } from "../../utils/actions";
 import Loader from "../../components/Loader/Loader";
 import { DELETE_USER } from "../../utils/mutation";
 import { useMutation } from "@apollo/client";
+import Auth from "../../utils/auth";
+import NoAuthPage from "../../components/NoAuthPage/NoAuthPage";
 
 // define a user so that user doesn't get added multiple times
 
@@ -49,58 +51,70 @@ const UserPageList = () => {
   };
 
   return (
-    <div>
-      {" "}
-      {data && !loading && (
-        <div className={classes.container}>
-          <div className={classes.heading}>
-            <p> USERS LIST</p>
-          </div>
+    <>
+      {Auth.admin() === "true" ? (
+        <div>
+          {" "}
+          {data && !loading && (
+            <div className={classes.container}>
+              <div className={classes.heading}>
+                <p> USERS LIST</p>
+              </div>
 
-          {data.users.map((user) => {
-            return (
-              <>
-                <Table striped bordered hover responsive className="table-sm">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>FIRST NAME</th>
-                      <th>LAST NAME</th>
-                      <th>EMAIL</th>
-                      <th>ADMIN</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr key={user._id}>
-                      <td>{user._id}</td>
-                      <td>{user.firstName}</td>
-                      <td>{user.lastName}</td>
-                      <td>{user.email}</td>
-                      <td>{user.isAdmin ? `✅` : `❌`} </td>
-                      <td>
-                        <LinkContainer to={`/admin/user/2}/edit`}>
-                          <Button variant="light" className="btn-sm">
-                            <i className="fas fa-edit">EDIT</i>
-                          </Button>
-                        </LinkContainer>
-                        <Button
-                          onClick={() => deleteUserHandler(user._id)}
-                          variant="danger"
-                          className="btn-sm"
-                        >
-                          <i className="fas fa-trash"> DELETE</i>
-                        </Button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </>
-            );
-          })}
+              {data.users.map((user) => {
+                return (
+                  <>
+                    <Table
+                      striped
+                      bordered
+                      hover
+                      responsive
+                      className="table-sm"
+                    >
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>FIRST NAME</th>
+                          <th>LAST NAME</th>
+                          <th>EMAIL</th>
+                          <th>ADMIN</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr key={user._id}>
+                          <td>{user._id}</td>
+                          <td>{user.firstName}</td>
+                          <td>{user.lastName}</td>
+                          <td>{user.email}</td>
+                          <td>{user.isAdmin ? `✅` : `❌`} </td>
+                          <td>
+                            <LinkContainer to={`/admin/user/2}/edit`}>
+                              <Button variant="light" className="btn-sm">
+                                <i className="fas fa-edit">EDIT</i>
+                              </Button>
+                            </LinkContainer>
+                            <Button
+                              onClick={() => deleteUserHandler(user._id)}
+                              variant="danger"
+                              className="btn-sm"
+                            >
+                              <i className="fas fa-trash"> DELETE</i>
+                            </Button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </>
+                );
+              })}
+            </div>
+          )}
         </div>
+      ) : (
+        <NoAuthPage />
       )}
-    </div>
+    </>
   );
 };
 

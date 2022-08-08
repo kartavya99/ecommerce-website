@@ -12,6 +12,8 @@ import { BsFileEarmarkDiffFill } from "react-icons/bs";
 import { useMutation } from "@apollo/client";
 import { DELETE_PRODUCT } from "../../utils/mutation";
 import { PRODUCT_DELETE_REQUEST } from "../../utils/actions";
+import Auth from "../../utils/auth";
+import NoAuthPage from "../../components/NoAuthPage/NoAuthPage";
 
 function ProductListPage() {
   const [state, dispatch] = useStoreContext();
@@ -49,64 +51,76 @@ function ProductListPage() {
   };
 
   return (
-    <div>
-      {data && !loading && (
-        <div className={classes.container}>
-          <Row>
-            <Col className={classes.heading}>
-              <p>PRODUCTS</p>
-            </Col>
-            <Col className="text-right">
-              <LinkContainer to={`/admin/product/create`}>
-                <Button className={classes["btn-primary"]}>
-                  ➕ CREATE PRODUCT
-                </Button>
-              </LinkContainer>
-            </Col>
-          </Row>
-          {data.getAllProducts.map((product) => {
-            // console.log(product);
-            return (
-              <>
-                <Table striped bordered hover responsive className="table-sm">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>NAME</th>
-                      <th>PRICE</th>
-                      <th>BRAND</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr key={product._id}>
-                      <td>{product._id}</td>
-                      <td>{product.productName}</td>
-                      <td>${product.price}</td>
-                      <td>{product.brand}</td>
-                      <td>
-                        <LinkContainer to={`/admin/product/1/edit`}>
-                          <Button variant="light" className="btn-sm">
-                            <BsFileEarmarkDiffFill />
-                          </Button>
-                        </LinkContainer>
-                        <Button
-                          onClick={() => deleteProductHandler(product._id)}
-                          variant="light"
-                          className="btn-sm"
-                        >
-                          <BsTrash />
-                        </Button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </>
-            );
-          })}
+    <>
+      {Auth.admin() ? (
+        <div>
+          {data && !loading && (
+            <div className={classes.container}>
+              <Row>
+                <Col className={classes.heading}>
+                  <p>PRODUCTS</p>
+                </Col>
+                <Col className="text-right">
+                  <LinkContainer to={`/admin/product/create`}>
+                    <Button className={classes["btn-primary"]}>
+                      ➕ CREATE PRODUCT
+                    </Button>
+                  </LinkContainer>
+                </Col>
+              </Row>
+              {data.getAllProducts.map((product) => {
+                // console.log(product);
+                return (
+                  <>
+                    <Table
+                      striped
+                      bordered
+                      hover
+                      responsive
+                      className="table-sm"
+                    >
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>NAME</th>
+                          <th>PRICE</th>
+                          <th>BRAND</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr key={product._id}>
+                          <td>{product._id}</td>
+                          <td>{product.productName}</td>
+                          <td>${product.price}</td>
+                          <td>{product.brand}</td>
+                          <td>
+                            <LinkContainer to={`/admin/product/1/edit`}>
+                              <Button variant="light" className="btn-sm">
+                                <BsFileEarmarkDiffFill />
+                              </Button>
+                            </LinkContainer>
+                            <Button
+                              onClick={() => deleteProductHandler(product._id)}
+                              variant="light"
+                              className="btn-sm"
+                            >
+                              <BsTrash />
+                            </Button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </Table>
+                  </>
+                );
+              })}
+            </div>
+          )}
         </div>
+      ) : (
+        <NoAuthPage />
       )}
-    </div>
+    </>
   );
 }
 
