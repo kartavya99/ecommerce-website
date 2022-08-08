@@ -7,6 +7,7 @@ import classes from "./CreateProductPage.module.css";
 import { useMutation } from "@apollo/client";
 import { CREATE_PRODUCT } from "../../utils/mutation";
 // import Loader from "../../components/Loader/Loader";
+import { LinkContainer } from "react-router-bootstrap";
 
 const CreateProductPage = () => {
   const [formState, setFormState] = useState({

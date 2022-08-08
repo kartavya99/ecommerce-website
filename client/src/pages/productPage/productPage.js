@@ -35,6 +35,11 @@ const ProductPage = () => {
   console.log(data.product._id);
 
   const addToCart = () => {
+    dispatch({
+      type: ADD_TO_CART,
+      cart: data,
+    });
+
     history(`/cart/${data.product._id}?qty=${qty}`);
   };
 

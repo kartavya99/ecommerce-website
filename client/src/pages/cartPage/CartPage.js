@@ -36,25 +36,25 @@ const CartPage = (item) => {
     variables: { id },
   });
 
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-      dispatch({
-        type: ADD_TO_CART,
-        cart: data,
-      });
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log(data);
+  //     // dispatch({
+  //     //   type: ADD_TO_CART,
+  //     //   cart: data,
+  //     // });
 
-      dispatch({
-        type: UPDATE_CART_QUANTITY,
-        cart: data,
-      });
-    }
-  }, [data, dispatch]);
+  //   //   dispatch({
+  //   //     type: UPDATE_CART_QUANTITY,
+  //   //     cart: data,
+  //   //   });
+  //   // }
+  // }, [data, dispatch]);
 
   const removeFromCartHandler = () => {
     dispatch({
       type: REMOVE_FROM_CART,
-      cart: item._id,
+      cart: data.product._id,
     });
   };
 
