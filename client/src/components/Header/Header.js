@@ -4,11 +4,10 @@ import Auth from "../../utils/auth";
 import { Container, Nav, Navbar, Form, NavDropdown } from "react-bootstrap";
 import { BsCartCheck } from "react-icons/bs";
 import { LinkContainer } from "react-router-bootstrap";
-import { useQuery } from "@apollo/client";
-import { QUERY_ME } from "../../utils/queries";
-import Loader from "../Loader/Loader";
-import { useStoreContext } from "../../utils/GlobalState";
-import HeaderCartButton from "../HeaderCartButton/HeaderCartButton";
+// import { useQuery } from "@apollo/client";
+// import { QUERY_ME } from "../../utils/queries";
+// import Loader from "../Loader/Loader";
+// import { useStoreContext } from "../../utils/GlobalState";
 
 import classes from "./Header.module.css";
 

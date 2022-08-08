@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useStoreContext } from "../../utils/GlobalState";
 import { Link, useParams } from "react-router-dom";
-import { ADD_TO_CART } from "../../utils/actions";
-import Auth from "../../utils/auth";
-import { USER_TO_STATE } from "../../utils/actions";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../../utils/actions";
+// import Auth from "../../utils/auth";
+// import { USER_TO_STATE } from "../../utils/actions";
 import { useQuery } from "@apollo/client";
-import { QUERY_ALL_PRODUCTS } from "../../utils/queries";
+// import { QUERY_ALL_PRODUCTS } from "../../utils/queries";
 import { QUERY_PRODUCT } from "../../utils/queries";
 import Loader from "../../components/Loader/Loader";
 
@@ -33,12 +33,25 @@ const CartPage = ({ match, location }) => {
 
   useEffect(() => {
     if (data) {
+      console.log(data);
       dispatch({
         type: ADD_TO_CART,
         cart: data,
       });
+
+      // dispatch({
+      //   type: REMOVE_FROM_CART,
+      //   cart: data,
+      // });
     }
   }, [data, dispatch]);
+
+  const removeFromCartHandler = (id) => {
+    dispatch({
+      type: REMOVE_FROM_CART,
+      cart: data.product.id,
+    });
+  };
 
   if (loading) return <Loader />;
 
@@ -68,7 +81,11 @@ const CartPage = ({ match, location }) => {
                     <Col md={2}>{item.product.price}</Col>
                     <Col me={2}>Quantity : 2</Col>
                     <Col md={2}>
-                      <Button type="button" variant="light">
+                      <Button
+                        type="button"
+                        variant="light"
+                        onClick={() => removeFromCartHandler(item.product)}
+                      >
                         Remove<i className="fas fa-trash"></i>
                       </Button>
                     </Col>

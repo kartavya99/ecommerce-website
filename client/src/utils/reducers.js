@@ -7,6 +7,7 @@ import {
   USER_DELETE_REQUEST,
   PRODUCT_DELETE_REQUEST,
   ADD_TO_CART,
+  REMOVE_FROM_CART,
 } from "./actions";
 
 export const reducer = (state, action) => {
@@ -50,6 +51,16 @@ export const reducer = (state, action) => {
       return {
         ...state,
         cart: [...state.cart, action.cart],
+      };
+
+    case REMOVE_FROM_CART:
+      let newState = state.cart.filter((product) => {
+        return product._id !== action._id;
+      });
+
+      return {
+        ...state,
+        cart: [...newState],
       };
 
     default:
