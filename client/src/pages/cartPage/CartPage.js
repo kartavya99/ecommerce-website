@@ -91,7 +91,7 @@ const CartPage = (item) => {
                           {item.product.productName}
                         </Link>
                       </Col>
-                      <Col md={2}>{item.product.price}</Col>
+                      <Col md={2}>${item.product.price}</Col>
                       <Col me={2}>
                         <Form.Control
                           as="select"
