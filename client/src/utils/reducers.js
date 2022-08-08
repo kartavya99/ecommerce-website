@@ -8,6 +8,7 @@ import {
   PRODUCT_DELETE_REQUEST,
   ADD_TO_CART,
   REMOVE_FROM_CART,
+  UPDATE_CART_QUANTITY,
 } from "./actions";
 
 export const reducer = (state, action) => {
@@ -61,6 +62,12 @@ export const reducer = (state, action) => {
       return {
         ...state,
         cart: [...newState],
+      };
+
+    case UPDATE_CART_QUANTITY:
+      return {
+        ...state,
+        cart: [...state.cart, action.cart],
       };
 
     default:
