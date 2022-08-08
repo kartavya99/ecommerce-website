@@ -18,7 +18,7 @@ import {
 
 import classes from "./ProductPage.module.css";
 
-const ProductPage = (item, { match }) => {
+const ProductPage = (match) => {
   const [qty, setQty] = useState(1);
   const [state, dispatch] = useStoreContext();
   const { cart, products } = state;
@@ -35,7 +35,7 @@ const ProductPage = (item, { match }) => {
   console.log(data.product._id);
 
   const addToCart = () => {
-    history(`/cart/${data.product._id}`);
+    history(`/cart/${data.product._id}?qty=${qty}`);
   };
 
   return (

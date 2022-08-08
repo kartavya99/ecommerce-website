@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ApolloClient,
   InMemoryCache,
@@ -23,6 +23,7 @@ import UserEditPage from "./pages/userEditPage/UserEditPage";
 import ProductListPage from "./pages/productListPage/ProductListPage";
 import ProductEditPage from "./pages/productEditPage/ProductEditPage";
 import CreateProductPage from "./pages/createProductPage/CreateProductPage";
+import Cart from "./components/CartComp/Cart";
 
 //Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -49,13 +50,24 @@ const client = new ApolloClient({
 });
 
 function App() {
+  const [cartIsShown, setCartIsShown] = useState(false);
+
+  const showCartHandler = () => {
+    setCartIsShown(true);
+  };
+
+  const hideCartHandler = () => {
+    setCartIsShown(false);
+  };
+
   return (
     <>
       <ApolloProvider client={client}>
         <Router>
           <div>
             <StoreProvider>
-              <Header />
+              {cartIsShown && <Cart onClose={hideCartHandler} />}
+              <Header onShowCart={showCartHandler} />
               <Routes>
                 <Route path="/" element={<HomePage />}></Route>
                 <Route path="/login" element={<Login />}></Route>

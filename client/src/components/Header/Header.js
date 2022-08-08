@@ -12,7 +12,7 @@ import HeaderCartButton from "../HeaderCartButton/HeaderCartButton";
 
 import classes from "./Header.module.css";
 
-const Header = (user) => {
+const Header = (props) => {
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="-xl">
@@ -58,9 +58,6 @@ const Header = (user) => {
               </Nav.Link>
             </LinkContainer>
           </Nav>
-          {/* <Nav>
-            <HeaderCartButton />
-          </Nav> */}
           {Auth.loggedIn() ? (
             <Nav className="navbar-nav ml-auto d-flex flex-row-reverse">
               <Nav.Link
