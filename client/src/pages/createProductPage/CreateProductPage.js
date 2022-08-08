@@ -6,17 +6,16 @@ import FormContainer from "../../components/Form/FormContainer";
 import classes from "./CreateProductPage.module.css";
 import { useMutation } from "@apollo/client";
 import { CREATE_PRODUCT } from "../../utils/mutation";
-import Loader from "../../components/Loader/Loader";
+// import Loader from "../../components/Loader/Loader";
 
 const CreateProductPage = () => {
   const [formState, setFormState] = useState({
-    user: "",
     productName: "",
     image: "",
     brand: "",
     description: "",
-    price: "",
-    countInStock: "",
+    price: 0,
+    countInStock: 0,
     uploading: "false",
   });
 
@@ -26,18 +25,19 @@ const CreateProductPage = () => {
     event.preventDefault();
 
     try {
-      await createProduct({
+      console.log(parseInt(formState.price));
+      const mutationResponse = await createProduct({
         variables: {
-          user: formState.user,
           productName: formState.productName,
           image: formState.image,
           brand: formState.brand,
           description: formState.description,
-          price: formState.price,
-          countInStock: formState.countInStock,
+          price: parseInt(formState.price),
+          countInStock: parseInt(formState.countInStock),
           uploading: formState.uploading,
         },
       });
+      console.log(mutationResponse);
     } catch (err) {
       console.log(err);
     }
@@ -60,29 +60,29 @@ const CreateProductPage = () => {
   //   });
   // };
 
-  const uploadFileHandler = async (event) => {
-    const file = event.target.files[0];
-    console.log(file);
-    const formData = new FormData();
-    formData.append("image", file);
-    formState.uploading(true);
+  // const uploadFileHandler = async (event) => {
+  //   const file = event.target.files[0];
+  //   console.log(file);
+  //   const formData = new FormData();
+  //   formData.append("image", file);
+  //   formState.uploading(true);
 
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //     };
 
-      const { data } = await axios.post("/api/upload", formData, config);
+  //     const { data } = await axios.post("/api/upload", formData, config);
 
-      formState.image(data);
-      formState.uploading(false);
-    } catch (error) {
-      console.error(error);
-      formState.image(false);
-    }
-  };
+  //     formState.image(data);
+  //     formState.uploading(false);
+  //   } catch (error) {
+  //     console.error(error);
+  //     formState.image(false);
+  //   }
+  // };
 
   return (
     <div className={classes.container}>
@@ -122,15 +122,15 @@ const CreateProductPage = () => {
               id="image"
               name="image"
               placeholder="Enter image"
-              onChange={uploadFileHandler}
+              onChange={handleChange}
             ></Form.Control>
             {/* {formState.uploading && <Loader />} */}
 
-            <input
-              type="file"
+            {/* <input
+              type="text"
               className="custom-file-input"
               id="inputGroupFile01"
-            />
+            /> */}
 
             {/* <Form.File
               id="image-file"

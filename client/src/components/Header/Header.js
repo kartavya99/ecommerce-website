@@ -58,9 +58,9 @@ const Header = (user) => {
               </Nav.Link>
             </LinkContainer>
           </Nav>
-          <Nav>
+          {/* <Nav>
             <HeaderCartButton />
-          </Nav>
+          </Nav> */}
           {Auth.loggedIn() ? (
             <Nav className="navbar-nav ml-auto d-flex flex-row-reverse">
               <Nav.Link

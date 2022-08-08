@@ -40,7 +40,6 @@ export const LOGIN = gql`
 
 export const CREATE_PRODUCT = gql`
   mutation CreateProduct(
-    $user: ID!
     $productName: String!
     $image: String!
     $brand: String!
@@ -49,7 +48,6 @@ export const CREATE_PRODUCT = gql`
     $countInStock: Int!
   ) {
     createProduct(
-      user: $user
       productName: $productName
       image: $image
       brand: $brand
@@ -132,7 +130,7 @@ export const DELETE_USER = gql`
 
 export const DELETE_PRODUCT = gql`
   mutation DeleteProduct($id: ID!) {
-    deleteProduct(id: $id) {
+    deleteProduct(_id: $id) {
       _id
     }
   }

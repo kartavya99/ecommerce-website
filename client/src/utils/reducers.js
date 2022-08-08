@@ -70,18 +70,19 @@ export const reducer = (state, action) => {
       };
 
     case USER_DELETE_REQUEST:
-      // let newUserState = state.user.filter((newUser) => {
-      //   return newUser._id !== action._idl;
-      // });
-      // return {
-      //   ...state,
-      //   user: newUserState,
-      // };
-
+      let newUserState = state.user.filter((newUser) => {
+        return newUser._id !== action._id;
+      });
+      console.log(newUserState);
       return {
         ...state,
-        user: [...state.user, action.user],
+        user: [...newUserState],
       };
+
+    // return {
+    //   ...state,
+    //   user: [...state.user, action.user],
+    // };
 
     default:
       return state;

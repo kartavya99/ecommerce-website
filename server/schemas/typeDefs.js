@@ -111,7 +111,6 @@ const typeDefs = gql`
     ): Auth
     login(email: String!, password: String!): Auth
     createProduct(
-      user: ID!
       productName: String!
       image: String!
       brand: String!

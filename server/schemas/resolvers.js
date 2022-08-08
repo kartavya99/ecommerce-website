@@ -7,7 +7,7 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        console.log(context.user);
+        // console.log(context.user);
         return await User.findById(context.user._id);
       }
       throw new AuthenticationError();
@@ -133,9 +133,9 @@ const resolvers = {
       const { productName, image, brand, description, price, countInStock } =
         args;
       if (context.user.isAdmin) {
-        console.log(user);
+        // console.log(context.user);
         return await Product.create({
-          user,
+          user: context.user._id,
           productName,
           image,
           brand,
@@ -201,7 +201,7 @@ const resolvers = {
           shippingPrice,
           user: context.user._id,
         });
-        console.log(order);
+        // console.log(order);
 
         await User.findByIdAndUpdate(context.user._id, {
           $push: { orders: order._id },

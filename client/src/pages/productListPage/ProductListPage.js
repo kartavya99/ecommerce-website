@@ -30,7 +30,7 @@ function ProductListPage() {
 
       dispatch({
         type: PRODUCT_DELETE_REQUEST,
-        products: data,
+        products: data.getAllProducts,
       });
     }
   }, [data, loading, dispatch]);
@@ -42,6 +42,7 @@ function ProductListPage() {
       const { data } = await deleteProduct({
         variables: { id },
       });
+      console.log(data);
     } catch (err) {
       console.log(err);
     }

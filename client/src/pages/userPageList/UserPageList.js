@@ -15,10 +15,11 @@ import { useMutation } from "@apollo/client";
 const UserPageList = () => {
   const [state, dispatch] = useStoreContext();
   const { user } = state;
+  console.log(user);
 
   const { loading, data } = useQuery(QUERY_USERS);
   const [deleteUser, { error }] = useMutation(DELETE_USER);
-  // console.log(data);
+  console.log(data);
 
   useEffect(() => {
     if (loading) {
@@ -27,12 +28,12 @@ const UserPageList = () => {
       // console.log(data);
       dispatch({
         type: USER_DELETE_REQUEST,
-        users: data,
+        users: data.users,
       });
 
       dispatch({
         type: UPDATE_USER,
-        users: data,
+        users: data.users,
       });
     }
   }, [data, loading, dispatch]);
