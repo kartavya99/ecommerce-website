@@ -20,7 +20,7 @@ A full stack web application build with MERN stack, where business can list thei
 
 # live application
 
-[ECOMM PLATFROM](https://techblogks.herokuapp.com/)
+[ECOMM PLATFROM](https://ecomm-platformks.herokuapp.com/)
 
 # Below are the sample pages of command line application
 
