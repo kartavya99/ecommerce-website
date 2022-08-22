@@ -18,7 +18,7 @@ import {
 
 import classes from "./ProductPage.module.css";
 
-const ProductPage = () => {
+const ProductPage = ({ prod }) => {
   const [qty, setQty] = useState(0);
   const [state, dispatch] = useStoreContext();
   const { cart, products } = state;

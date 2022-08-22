@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useStoreContext } from "../../utils/GlobalState";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
@@ -25,11 +25,15 @@ import {
 } from "react-bootstrap";
 import classes from "./Cart.module.css";
 
-const CartPage = (item) => {
+const CartPage = () => {
   const [total, setTotal] = useState();
   const [state, dispatch] = useStoreContext();
   const { cart } = state;
   console.log(cart);
+
+  const location = useLocation();
+  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
+  console.log(qty);
 
   const { id } = useParams();
   const { data, loading } = useQuery(QUERY_PRODUCT, {
@@ -37,26 +41,28 @@ const CartPage = (item) => {
   });
 
   // useEffect(() => {
-  //   if (data) {
-  //     console.log(data);
-  //     // dispatch({
-  //     //   type: ADD_TO_CART,
-  //     //   cart: data,
-  //     // });
+  //   if (id) {
+  //     dispatch({
+  //       type: ADD_TO_CART,
+  //       cart: { data, id, qty },
+  //     });
+  //   }
+  // }, [data, dispatch, id, qty]);
 
-  //   //   dispatch({
-  //   //     type: UPDATE_CART_QUANTITY,
-  //   //     cart: data,
-  //   //   });
-  //   // }
-  // }, [data, dispatch]);
+  // const addToCartHandler = () => {
+  //   dispatch({
+  //     type: ADD_TO_CART(id, qty),
+  //     cart: { data, id, qty },
+  //   });
+  // };
 
-  const removeFromCartHandler = () => {
-    dispatch({
-      type: REMOVE_FROM_CART,
-      cart: data.product._id,
-    });
-  };
+  // const removeFromCartHandler = (item) => {
+  //   dispatch({
+  //     type: REMOVE_FROM_CART,
+  //     payload: item,
+  //   });
+  //   console.log(prod);
+  // };
 
   if (loading) return <Loader />;
 
@@ -95,25 +101,38 @@ const CartPage = (item) => {
                       <Col me={2}>
                         <Form.Control
                           as="select"
-                          value={item.product.qty}
-                          // onChange={(e) =>
-                          //   dispatch(
-                          //     ADD_TO_CART(item.product, Number(e.target.value))
+                          value={item.product.countInStock}
+                          // onClick={(e) =>
+                          //   addToCartHandler(
+                          //     item.product,
+                          //     Number(e.target.value)
                           //   )
                           // }
+                          onChange={(e) =>
+                            dispatch(
+                              ADD_TO_CART(item.product, Number(e.target.value))
+                            )
+                          }
                         >
-                          {[...Array(item.countInStock).keys()].map((x) => (
-                            <option key={x + 1} value={x + 1}>
-                              {x + 1}
-                            </option>
-                          ))}
+                          {[...Array(item.product.countInStock).keys()].map(
+                            (x) => (
+                              <option key={x + 1} value={x + 1}>
+                                {x + 1}
+                              </option>
+                            )
+                          )}
                         </Form.Control>
                       </Col>
                       <Col md={2}>
                         <Button
                           type="button"
                           variant="light"
-                          onClick={() => removeFromCartHandler(item.product)}
+                          onClick={() =>
+                            dispatch({
+                              type: REMOVE_FROM_CART,
+                              payload: item.product._id,
+                            })
+                          }
                         >
                           Remove<i className="fas fa-trash"></i>
                         </Button>
@@ -130,8 +149,9 @@ const CartPage = (item) => {
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2 className={classes.h2}>
-                  Subtotal (
-                  {cart.reduce((acc, item) => acc + item.product.qty, 0)}) items
+                  Subtotal ({cart.reduce((acc, item) => acc + item.qty, 0)})
+                  items
+                  {console.log(qty)}
                 </h2>
                 ${" "}
                 {cart

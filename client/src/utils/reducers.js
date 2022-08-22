@@ -55,14 +55,35 @@ export const reducer = (state, action) => {
       };
 
     case REMOVE_FROM_CART:
-      let newState = state.cart.filter((product) => {
-        return product._id !== action._id;
-      });
-
       return {
         ...state,
-        cart: [...newState],
+        cart: state.cart.filter(
+          (product) => product._id !== action.payload._id
+        ),
       };
+
+    // case REMOVE_FROM_CART:
+    //   let newCartState = state.cart.filter((newProduct) => {
+    //     console.log(newProduct);
+    //     console.log(newProduct.product._id);
+    //     return newProduct._id !== action._id;
+    //   });
+    //   console.log("inside cart state");
+
+    //   return {
+    //     ...state,
+    //     cart: [...newCartState],
+    //   };
+
+    // case USER_DELETE_REQUEST:
+    //   let newUserState = state.user.filter((newUser) => {
+    //     return newUser._id !== action._id;
+    //   });
+    //   console.log(newUserState);
+    //   return {
+    //     ...state,
+    //     user: [...newUserState],
+    //   };
 
     case UPDATE_CART_QUANTITY:
       return {
