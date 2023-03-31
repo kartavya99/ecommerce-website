@@ -34,35 +34,26 @@ const CartPage = () => {
   const location = useLocation();
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
   console.log(qty);
+  console.log(typeof qty);
 
   const { id } = useParams();
   const { data, loading } = useQuery(QUERY_PRODUCT, {
     variables: { id },
   });
 
-  // useEffect(() => {
-  //   if (id) {
-  //     dispatch({
-  //       type: ADD_TO_CART,
-  //       cart: { data, id, qty },
-  //     });
-  //   }
-  // }, [data, dispatch, id, qty]);
+  const removeFromCart = () => {
+    dispatch({
+      type: REMOVE_FROM_CART,
+      cart: data,
+    });
+  };
 
-  // const addToCartHandler = () => {
-  //   dispatch({
-  //     type: ADD_TO_CART(id, qty),
-  //     cart: { data, id, qty },
-  //   });
-  // };
-
-  // const removeFromCartHandler = (item) => {
-  //   dispatch({
-  //     type: REMOVE_FROM_CART,
-  //     payload: item,
-  //   });
-  //   console.log(prod);
-  // };
+  const addToCart = () => {
+    dispatch({
+      type: ADD_TO_CART,
+      cart: data,
+    });
+  };
 
   if (loading) return <Loader />;
 
@@ -79,7 +70,7 @@ const CartPage = () => {
           ) : (
             <ListGroup variant="flush">
               {cart.map((item) => {
-                console.log(item);
+                // console.log(item);
                 return (
                   <div>
                     <Row key={item._id}>
@@ -101,18 +92,19 @@ const CartPage = () => {
                       <Col me={2}>
                         <Form.Control
                           as="select"
-                          value={item.product.countInStock}
+                          value={item.qty}
+                          onChange={addToCart}
                           // onClick={(e) =>
                           //   addToCartHandler(
                           //     item.product,
                           //     Number(e.target.value)
                           //   )
                           // }
-                          onChange={(e) =>
-                            dispatch(
-                              ADD_TO_CART(item.product, Number(e.target.value))
-                            )
-                          }
+                          // onChange={(e) =>
+                          //   dispatch(
+                          //     ADD_TO_CART(item.product, Number(e.target.value))
+                          //   )
+                          // }
                         >
                           {[...Array(item.product.countInStock).keys()].map(
                             (x) => (
@@ -149,16 +141,13 @@ const CartPage = () => {
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2 className={classes.h2}>
-                  Subtotal ({cart.reduce((acc, item) => acc + item.qty, 0)})
+                  Subtotal ( &nbsp; {cart.reduce((acc, item) => acc + qty, 0)})
                   items
                   {console.log(qty)}
                 </h2>
                 ${" "}
                 {cart
-                  .reduce(
-                    (acc, item) => acc + item.product.qty * item.product.price,
-                    0
-                  )
+                  .reduce((acc, item) => acc + qty * item.product.price, 0)
                   .toFixed(2)}
               </ListGroup.Item>
               <ListGroup.Item>
