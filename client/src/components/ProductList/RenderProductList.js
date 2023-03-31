@@ -35,5 +35,4 @@ const RenderProductList = ({ data }) => {
     </>
   );
 };
-
 export default RenderProductList;

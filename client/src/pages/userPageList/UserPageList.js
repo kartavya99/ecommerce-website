@@ -17,32 +17,41 @@ import NoAuthPage from "../../components/NoAuthPage/NoAuthPage";
 const UserPageList = () => {
   const [state, dispatch] = useStoreContext();
   const { user } = state;
-  console.log(user);
+  // console.log(user);
 
   const { loading, data } = useQuery(QUERY_USERS);
   const [deleteUser, { error }] = useMutation(DELETE_USER);
-  console.log(data);
+  // console.log(data);
 
   useEffect(() => {
     if (loading) {
       <Loader />;
     } else if (data) {
       // console.log(data);
-      dispatch({
-        type: USER_DELETE_REQUEST,
-        users: data.users,
-      });
-
-      dispatch({
-        type: UPDATE_USER,
-        users: data.users,
-      });
+      // dispatch({
+      //   type: USER_DELETE_REQUEST,
+      //   users: data.users,
+      // });
+      // dispatch({
+      //   type: UPDATE_USER,
+      //   users: data.users,
+      // });
     }
   }, [data, loading, dispatch]);
 
   const deleteUserHandler = async (id) => {
+    dispatch({
+      type: USER_DELETE_REQUEST,
+      users: data.users,
+    });
+
+    dispatch({
+      type: UPDATE_USER,
+      users: data.users,
+    });
+
     try {
-      const { data } = await deleteUser({
+      await deleteUser({
         variables: { id },
       });
     } catch (err) {
